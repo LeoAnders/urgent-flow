@@ -1,0 +1,18 @@
+{
+  "name": "urgent-flow",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Urgent Flow</h1>",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start_dev": "NODE_ENV=development electron ."
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^25.2.0"
+  },
+  "dependencies": {
+    "mongoose": "^7.3.1"
+  }
+}
