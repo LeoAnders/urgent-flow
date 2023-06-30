@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urgent flow</title>
+  <!--Bootstrap link-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script  defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!--Style-->
+  <link rel="stylesheet" href="./styles/style.css">
+  <!--User interaction script-->
+  <script defer src="./scripts/interaction.js"></script>
+  
+</head>
+
+<body>
+
+  <section>
+
+    <p class="tab-information">'Geral'. Pedidos independentemente de sua urgência ou status.</p>
+
+<!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="changeContent('Geral')">Geral</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="changeContent('Urgente')">Urgente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="changeContent('Finalizado')">Finalizado</a>
+          </li>
+        </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ml-auto">
+              <button type="button" class="btn btn-success ">Novo Pedido</button>
+            </li>
+          </ul>
+      </div>
+    </nav>
+
+  </section>
+
+
+  
+
+</body>
+</html>
