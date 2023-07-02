@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="./styles/style.css">
   <!--User interaction script-->
   <script src="./scripts/interaction.js" defer></script>
-  
+  <!--Data manipulation-->
+  <script src="./scripts/dataManipulation.js" defer></script>
 </head>
 
 <body>
@@ -50,7 +51,40 @@
             <h5 class="modal-title " id="exampleModalLabel">Preenchimento de dados do pedido</h5>
           </div>
           <div class="modal-body">
-            ...
+
+               <!--Filling data-->
+              <form>
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="Nome" placeholder="Obrigatório" required>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="representante">Representante</label>
+                    <input type="text" class="form-control" placeholder="Opcional">
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="nDoPedido">N° do pedido</label>
+                    <input type="number" class="form-control " id="Nome" placeholder="Importante" required>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="tdataDeEntrega">Data de entrega</label>
+                    <input type="date" class="form-control" placeholder="Obrigatório"  id="delivery-date" >
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="transportadora">Transportadora<label>
+                    <input type="number" class="form-control" placeholder="Opcional">
+                  </div>
+                  <div class="col-6 mt-3 mb-3">
+                    <label for="tipo">Tipo</label>
+                    <select class="form-control">
+                      <option selected>Sem seleção...</option>
+                      <option>Urgente</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" id="modal-close-btn" data-bs-dismiss="modal">Fechar</button>
