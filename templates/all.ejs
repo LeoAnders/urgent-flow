@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urgent flow</title>
+  <!--Bootstrap link-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- Bootstrap icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+
+<body>
+  <!--Navbar-->
+  <div class="container">
+    <nav class="navbar bg-body-tertiary mb-3 mt-3 ">
+      <form class="container-fluid justify-content-start">
+        <h2 class="me-3">Urgente</h2>
+        <li class="nav-item">
+          <button type="button" class="btn btn-outline-success btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal">Novo Pedido</button>
+        </li>
+      </form>
+    </nav>
+    
+    <% for (let i = 0; i < requests.length; i++) { %> 
+        <div id="<%=requests[i]._id%>">
+          <h2><%= requests[i].name%></h2>
+          <p><%= requests[i].representative%></p>
+          <p><%= requests[i].requestNumber%></p>
+          <p><%= requests[i].date%></p>
+          <p><%= requests[i].shipping%></p>
+          <p><%= requests[i].description%></p>
+        </div>
+   <% } %>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="orders-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title " id="exampleModalLabel">Preenchimento de dados do pedido</h5>
+          </div>
+          <div class="modal-body">
+
+               <!--Filling data-->
+              <form action="/" method="POST">
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="name" placeholder="Obrigatório" required>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="representante">Representante</label>
+                    <input type="text" class="form-control" name="representative" placeholder="Opcional">
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="nDoPedido">N° do pedido</label>
+                    <input type="number" class="form-control" name="requestNumber" placeholder="Importante" required>
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="dataDeEntrega">Data de entrega</label>
+                    <input type="date" class="form-control" name="date" placeholder="Obrigatório">
+                  </div>
+                  
+                  <div class="col-6 mt-3">
+                    <label for="transportadora">Envio<label>
+                    <input type="text" class="form-control" name="shipping" placeholder="Opcional">
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label for="descricao">Descrição<label>
+                    <textarea class="field form-control " name="description" rows="1" placeholder="Descrição"></textarea>
+                  </div>
+                </div>
+                <div class="text-end mt-3">
+                  <button type="button" class="btn btn-secondary" id="modal-close-btn" data-bs-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-success" >Salvar</button>
+                </div>
+              </form>
+          </div>        
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

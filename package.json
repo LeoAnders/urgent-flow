@@ -4,17 +4,18 @@
   "description": "<h1 align=\"center\">Urgent Flow</h1>",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "start_dev": "NODE_ENV=development electron ."
+    "start": "concurrently \"node app.js \" \"electron .\"",
+    "start_dev": "concurrently \"NODE_ENV=development\" \"electron .\""
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "electron": "^25.2.0"
   },
   "dependencies": {
-    "bootstrap": "^5.3.0",
     "ejs": "^3.1.9",
+    "ejs-electron": "^2.1.1",
     "express": "^4.18.2",
     "mongoose": "^7.3.1",
     "node": "^20.3.1"

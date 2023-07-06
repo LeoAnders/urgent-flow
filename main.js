@@ -1,31 +1,34 @@
+const { app, BrowserWindow } = require("electron");
 
-const {app, BrowserWindow, menu} =require("electron") ;
-const isDev = process.env.NODE_ENV !==undefined && process.env.NODE_ENV === "development" ?true : false ;
+const isDev =
+  process.env.NODE_ENV !== undefined && process.env.NODE_ENV === "development"
+    ? true
+    : false;
 
-function createWindow(){
-    const win = new BrowserWindow({
-      width:1280,
-      height:832,
-      show: false,
-      webPreferences: {
-        nodeIntegration: true
-      },
-    })
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 1024,
+    height: 834,
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      enableRemoteModule: true,
+    },
+  });
 
-    win.loadFile("./src/index.html")
-    if(isDev){
-      win.webContents.openDevTools()
-    }
+  win.loadURL("http://localhost:3000");
+  if(isDev){
+    win.webContents.openDevTools()
+   }
 
-    win.once("ready-to-show", ()=>{
-      win.show()
-    })
-
+  win.once("ready-to-show", () => {
+    win.show();
+  });
 }
 
-app.whenReady().then(()=>{
-  if(BrowserWindow.getAllWindows().length === 0){
-      createWindow()
+app.whenReady().then(() => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
   }
-  
-})
+});
