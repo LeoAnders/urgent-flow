@@ -6,7 +6,8 @@ const requestSchema = new mongoose.Schema({
   requestNumber: {type: Number},
   date:{type:Date },
   shipping: { type: String },
-  description:{ type: String }
+  description:{ type: String },
+  finished:{type:Boolean, default:false}
 })
 
 module.exports = mongoose.model("Request", requestSchema)

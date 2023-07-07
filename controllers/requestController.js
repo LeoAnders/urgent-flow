@@ -20,4 +20,28 @@ const allRequests = async (req, res) => {
   }
 };
 
-module.exports = { addRequest, allRequests };
+const loadFinishedRequests = async (req,res) =>{
+  try{
+    let docs = await Request.find({ finished: true })
+    res.render("done", {requests:docs}) 
+  }catch(error){
+    res.status(404)
+  }
+}
+
+const addFinishedRequest = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let doc = await Request.findById(id);
+    doc.finished = true;
+    await doc.save();
+
+    let updateRequests = await Request.find({finished: false })
+    res.render("all", {requests: updateRequests})
+  } catch (error) {
+    res.status(404);
+  }
+};
+
+
+module.exports = { addRequest, allRequests, loadFinishedRequests, addFinishedRequest };

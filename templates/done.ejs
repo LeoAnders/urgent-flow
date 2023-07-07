@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos finalizados</title>
+   <!--Bootstrap link-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+   <!-- Bootstrap icons-->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+  <a href="/">Voltar a tela de urgentes</a>
+
+  <h1>Pedidos Finalizados</h1>
+
+  <% for (let i = 0; i < requests.length; i++) { %>
+      <div id="<%= requests[i]._id %>">
+        <h2><%= requests[i].name %></h2>
+        <p><%= requests[i].representative %></p>
+        <p><%= requests[i].requestNumber %></p>
+        <p><%= requests[i].date %></p>
+        <p><%= requests[i].shipping %></p>
+        <p><%= requests[i].description %></p>
+      </div>
+  <% } %>
+
+ 
+</body>
+</html>
