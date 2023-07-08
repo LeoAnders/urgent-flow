@@ -1,0 +1,21 @@
+
+.card{
+  border-left: 4px solid #198754;
+}
+  .line {
+  border-left: 1px solid #ccc;
+  height: 100%;
+  position: absolute;
+  left: 154px;
+} 
+.finished{
+  position: absolute;
+  left: 88%;
+  bottom: 1px;
+  display: flex; 
+  flex-direction: row;
+}
+
+span{
+  color: rgb(70, 70, 70);
+}
