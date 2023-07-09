@@ -66,7 +66,17 @@ const filterCurrentDay = async (req, res) => {
     let docs = await Request.find({finished: false}).sort({date: 1});
     res.render("all", { requests: docs })
   }catch(error) {
-    res.send("no links found")
+    res.status(500).send(error)
+  }
+}
+
+//filter by most recent completed request
+const latestFiltering = async (req, res) => {
+  try{
+    let docs = await Request.find({finished: true}).sort({date: 1}).exec();
+    res.render("done", { requests: docs })
+  }catch(error) {
+    res.status(500).send(error)
   }
 }
 
@@ -77,5 +87,6 @@ module.exports = {
   addFinishedRequest,
   deleteRequest,
   filterCurrentDay,
+  latestFiltering,
   
 };

@@ -6,6 +6,7 @@ router.use(methodOverride('_method'));
 const requestController = require("../controllers/requestController");
 
 router.get("/", requestController.filterCurrentDay)
+router.get("/done", requestController.latestFiltering)
 router.get("/", requestController.allRequests)
 router.get("/done", requestController.loadFinishedRequests)
 
