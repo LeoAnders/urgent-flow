@@ -1,5 +1,6 @@
 const Request = require("../models/Request");
 
+//Add request to urgent screen
 const addRequest = async (req, res) => {
    let request = new Request(req.body)
   try {
@@ -10,16 +11,17 @@ const addRequest = async (req, res) => {
   }
 };
 
+//loads the urgent screen 
 const allRequests = async (req, res) => {
   try{
     let docs = await Request.find( {} );
     res.render("all", { requests: docs })
   }catch(error) {
     res.send("no links found")
-
   }
 };
 
+//load finished screen
 const loadFinishedRequests = async (req,res) =>{
   try{
     let docs = await Request.find({ finished: true })
@@ -29,6 +31,7 @@ const loadFinishedRequests = async (req,res) =>{
   }
 }
 
+//Add request to finished screen
 const addFinishedRequest = async (req, res) => {
   try {
     let id = req.params.id;
@@ -43,5 +46,20 @@ const addFinishedRequest = async (req, res) => {
   }
 };
 
+//filter requests by current date
+const filterCurrentDay = async (req, res) => {
+  try{
+    let docs = await Request.find({finished: false}).sort({date: 1});
+    res.render("all", { requests: docs })
+  }catch(error) {
+    res.send("no links found")
+  }
+}
 
-module.exports = { addRequest, allRequests, loadFinishedRequests, addFinishedRequest };
+module.exports = { 
+  addRequest,
+  allRequests,
+  loadFinishedRequests,
+  addFinishedRequest,
+  filterCurrentDay,
+};
