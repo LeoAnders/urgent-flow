@@ -1,0 +1,22 @@
+@media print {
+  body {
+
+  }
+  .nav{
+    display: none;
+  }
+  form .btn{
+    display: none;
+  }
+  .day{
+   font-size: 30px;
+  }
+  .line{
+    display: none;
+  }
+  .card-footer{
+    display: none;
+  }
+ 
+}
+
