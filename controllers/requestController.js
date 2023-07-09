@@ -46,6 +46,20 @@ const addFinishedRequest = async (req, res) => {
   }
 };
 
+//deleting request from the finished screen
+const deleteRequest = async (req, res) => {
+  let id = req.params.id
+  if(!id){
+    id = req.body.id
+  }
+  try{
+    await Request.findByIdAndDelete(id)
+    res.redirect("/done")
+  }catch(error){
+    res.status(404).send(error)
+  }
+}
+
 //filter requests by current date
 const filterCurrentDay = async (req, res) => {
   try{
@@ -61,5 +75,7 @@ module.exports = {
   allRequests,
   loadFinishedRequests,
   addFinishedRequest,
+  deleteRequest,
   filterCurrentDay,
+  
 };

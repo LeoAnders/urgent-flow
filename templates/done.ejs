@@ -33,7 +33,8 @@
     </nav>
     
     <% for (let i = 0; i < requests.length; i++) { %>
-        <div id="<%=requests[i]._id%>" class="card mb-3">
+      <div id="<%=requests[i]._id%>" class="card mb-3">
+        <form method="POST" action="/done/<%= requests[i]._id %>/?_method=DELETE">
           <div class="container">
             <div class="row">
               <div class="line"></div> 
@@ -71,10 +72,18 @@
                     <div> <span>Descrição: </span><%= requests[i].description %></div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col ">
+                      <button class="btn btn-danger delete" type="submit">Deletar</button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
-        </div>
+        </form>
+      </div>
     <% } %>
 
 <footer>

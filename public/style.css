@@ -16,6 +16,13 @@
   flex-direction: row;
 }
 
+.delete{
+  position: absolute;
+  left: 90%;
+  bottom: 1px;
+  display: flex; 
+  flex-direction: row;
+}
 
 span{
   color: rgb(70, 70, 70);
