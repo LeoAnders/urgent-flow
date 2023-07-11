@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+const path = require("path")
 
 const isDev =
   process.env.NODE_ENV !== undefined && process.env.NODE_ENV === "development"
@@ -10,6 +11,7 @@ function createWindow() {
     width: 1024,
     height: 834,
     show: false,
+    icon: path.join(__dirname,"assets", "icons", "fast-delivery_256x256.png" ),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
