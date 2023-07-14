@@ -1,17 +1,19 @@
 {
   "name": "urgent-flow",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\">Urgent Flow</h1>",
+  "description": "Urgent Flow",
   "main": "main.js",
   "scripts": {
     "start": "concurrently \"node app.js \" \"electron .\"",
-    "start_dev": "concurrently \"NODE_ENV=development\" \"electron .\""
+    "start_dev": "concurrently \"NODE_ENV=development\" \"electron .\"",
+    "pack": "electron-builder"
   },
-  "author": "",
+  "author": "LeonardoAnders",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.0",
-    "electron": "^25.2.0"
+    "electron": "^25.2.0",
+    "electron-builder": "^24.4.0"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
@@ -21,5 +23,15 @@
     "method-override": "^3.0.0",
     "mongoose": "^7.3.1",
     "node": "^20.3.1"
+  },
+  "build": {
+    "appId": "com.example.urgent-flow",
+    "productName": "Urgent Flow",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
   }
 }

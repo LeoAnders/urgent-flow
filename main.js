@@ -11,7 +11,7 @@ function createWindow() {
     width: 1024,
     height: 834,
     show: false,
-    icon: path.join(__dirname,"assets", "icons", "fast-delivery_256x256.png" ),
+    icon: path.join(__dirname,"assets", "icons", "entrega-rapida512x512.png" ),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
