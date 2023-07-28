@@ -1,7 +1,7 @@
 
 const userLogin = async (req, res)=>{
   try {
-    res.send("login");
+    res.render("login");
 
   }catch(error) {
     res.status(400).send(error)
@@ -10,7 +10,7 @@ const userLogin = async (req, res)=>{
 
 const userRegister = async (req, res)=>{
   try {
-    res.send("Register")
+    res.render("register")
     
   }catch(error) {
     res.status(400).send(error)

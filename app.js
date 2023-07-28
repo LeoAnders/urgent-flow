@@ -5,9 +5,11 @@ const path = require('path');
 const requestRoute = require("./routes/requestRoute");
 const userRoute = require("./routes/userRoute")
 
+// EJS
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'templates'))  
 
+// MongoDB connection
 const mongo = require("./database/mongo")
 mongo()
 
