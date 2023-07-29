@@ -38,46 +38,50 @@ const registerHandle = async (req, res) => {
 
   // Check password length
   if (password.length < 6) {
-    errors.push({ msg: "A senha deve ter pelo menos 6 caracteres" });
+    errors.push({ msg: "Senha requer, no mínimo, 6 caracteres." });
   }
 
   // If there are errors, render the register page with the error messages and form values
   if (errors.length > 0) {
-    res.render("register", {
+    return res.render("register", {
       errors,
       name,
       username,
       password,
       password2,
     });
-  } else {
+    
+  } 
 
-    // First, check if the username already exists in the database
-    try {
-      let selectedUser = await User.findOne({ username: username });
-      if (selectedUser) {
-        errors.push({msg: "Usuário já existe"});
-      }
-    } catch (error) {
-      res.status(500).send(error);
-    }
 
-    // If the username is not found, create a new user
-    let user = new User({
-      name: name,
-      username: username,
-      password: password,
-      password2: password2,
-      role: role,
+  // Check if the username already exists in the database
+  let selectedUser = await User.findOne({ username: req.body.username });
+  if (selectedUser) {
+    errors.push({ msg: "Usuário já existe" });
+    return res.render("register", {
+      errors,
+      name,
+      username,
+      password,
+      password2,
     });
-
-    try {
-      let savedUser = await user.save();
-      res.send(savedUser);
-    } catch (error) {
-      res.status(400).send(error);
-    }
   }
+
+  // If the username is not found and there are no other errors, create a new user
+  let user = new User({
+    name: name,
+    username: username,
+    password: password,
+    password2: password2,
+    role: role,
+  });
+
+    try{
+      let savedUser = await user.save()
+      res.render("register")
+    }catch(error) {
+      res.status(400).send(error)
+    }
 };
 
 module.exports = {
