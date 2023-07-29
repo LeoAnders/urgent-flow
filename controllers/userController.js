@@ -1,4 +1,5 @@
 const User = require ("../models/User")
+const bcrypt = require ("bcryptjs")
 
 //loads login screen
 const userLogin = async (req, res)=>{
@@ -71,9 +72,10 @@ const registerHandle = async (req, res) => {
   let user = new User({
     name: name,
     username: username,
-    password: password,
+    password: bcrypt.hashSync(password),
     password2: password2,
     role: role,
+    admin: req.body.admin === "on",
   });
 
     try{
