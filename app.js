@@ -15,7 +15,7 @@ mongo()
 
 //Routes
 app.use("/", requestRoute);
-app.use("/user", userRoute)
+app.use("/user", express.json(), userRoute)
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(process.env.PORT, () => {

@@ -24,7 +24,7 @@ const userRegister = async (req, res)=>{
 
 // register handle
 const registerHandle = async (req, res) => {
-  const { name, username, password, password2, role } = req.body;
+  const { name, username, password, password2, role, admin } = req.body;
   const errors = [];
 
   // Check required fields
@@ -56,7 +56,7 @@ const registerHandle = async (req, res) => {
 
 
   // Check if the username already exists in the database
-  let selectedUser = await User.findOne({ username: req.body.username });
+  let selectedUser = await User.findOne({ username: username});
   if (selectedUser) {
     errors.push({ msg: "Usuário já existe" });
     return res.render("register", {
@@ -75,7 +75,7 @@ const registerHandle = async (req, res) => {
     password: bcrypt.hashSync(password),
     password2: password2,
     role: role,
-    admin: req.body.admin === "on",
+    admin: admin === "on",
   });
 
     try{
@@ -86,8 +86,28 @@ const registerHandle = async (req, res) => {
     }
 };
 
+const loginHandle = async (req, res) =>{
+
+  const { username, password } = req.body;
+  
+ try{
+  let selectedUser = await User.findOne({ username: username })
+  if(!selectedUser) return res.status(400).send("User incorrect")
+
+  let passwordAndUserMatch = bcrypt.compareSync(password, selectedUser.password)
+  if(!passwordAndUserMatch) return res.status(400).send("password incorrect")
+
+  res.redirect("/")
+
+  }catch(error) {
+    res.send(error)
+  };
+
+};
+
 module.exports = {
   userLogin,
   userRegister,
-  registerHandle
+  registerHandle,
+  loginHandle
 }
