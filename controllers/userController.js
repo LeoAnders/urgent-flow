@@ -1,5 +1,6 @@
 const User = require ("../models/User")
 const bcrypt = require ("bcryptjs")
+const passport = require("passport")
 
 //loads login screen
 const userLogin = async (req, res)=>{
@@ -86,28 +87,18 @@ const registerHandle = async (req, res) => {
     }
 };
 
-const loginHandle = async (req, res) =>{
+const userPassport = (req, res, next ) => {
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/user/login',
+    failureFlash: true
+  })(req, res, next);
 
-  const { username, password } = req.body;
-  
- try{
-  let selectedUser = await User.findOne({ username: username })
-  if(!selectedUser) return res.status(400).send("User incorrect")
-
-  let passwordAndUserMatch = bcrypt.compareSync(password, selectedUser.password)
-  if(!passwordAndUserMatch) return res.status(400).send("password incorrect")
-
-  res.redirect("/")
-
-  }catch(error) {
-    res.send(error)
-  };
-
-};
+}
 
 module.exports = {
   userLogin,
   userRegister,
   registerHandle,
-  loginHandle
+  userPassport
 }

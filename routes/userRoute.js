@@ -6,6 +6,6 @@ router.get("/login", userController.userLogin)
 router.get("/register", userController.userRegister)
 
 router.post("/register", express.urlencoded({ extended:true }), userController.registerHandle)
-router.post("/login",express.urlencoded({ extended:true }), userController.loginHandle)
+router.post("/login", express.urlencoded({ extended:true }), userController.userPassport)
 
 module.exports = router
