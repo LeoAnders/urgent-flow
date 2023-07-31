@@ -13,3 +13,10 @@
    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
  </div>
 <% } %>
+
+<% if(error_msg != "") { %>
+  <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+    <%= error_msg %>
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+ </div>
+<% } %>
