@@ -6,6 +6,7 @@ const session = require("express-session");
 const requestRoute = require("./routes/requestRoute");
 const userRoute = require("./routes/userRoute");
 const passport = require("passport")
+const { ensureAuthenticated } = require("./controllers/authController")
 
 const app = express();
 
@@ -43,8 +44,9 @@ app.use((req, res, next)=>{
 })
 
 //Routes
-app.use("/", requestRoute);
 app.use("/user", express.json(), userRoute)
+app.use("/",ensureAuthenticated, express.json(), requestRoute);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(process.env.PORT, () => {

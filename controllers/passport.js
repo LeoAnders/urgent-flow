@@ -6,7 +6,9 @@ module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: "username" }, (username, password, done) => {
       // Match User
-      User.findOne({ username: username })
+      User.findOne({ 
+        username: username
+       })
         .then(user => {
           if (!user) {
             return done(null, false, { message: "Usuário nao cadastrado" });
@@ -28,11 +30,11 @@ module.exports = function(passport) {
   );
 
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, { id: user.id, name: user.name });
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id)
+  passport.deserializeUser((data, done) => {
+    User.findById(data.id)
       .then(user => {
         done(null, user);
       })

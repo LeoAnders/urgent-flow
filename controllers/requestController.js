@@ -15,7 +15,7 @@ const addRequest = async (req, res) => {
 const allRequests = async (req, res) => {
   try{
     let docs = await Request.find( {} );
-    res.render("all", { requests: docs })
+    res.render("all", { requests: docs, user: req.user.name });
   }catch(error) {
     res.send("no links found")
   }
@@ -88,5 +88,4 @@ module.exports = {
   deleteRequest,
   filterCurrentDay,
   latestFiltering,
-  
 };

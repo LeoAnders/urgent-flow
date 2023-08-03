@@ -100,5 +100,5 @@ module.exports = {
   userLogin,
   userRegister,
   registerHandle,
-  userPassport
+  userPassport,
 }
