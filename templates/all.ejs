@@ -18,21 +18,47 @@
 </head>
 
 <body>
-
+  
+   
   <!--Navbar-->
-  <div class="container">
-    <p>Welcome, <%= user %>!</p>
+  <div class="container bg-light rounded-top-4 vh-100 mt-3">
+
     
-    <nav class="nav navbar bg-body-tertiary mb-3 mt-3 sticky-top border border-dark border-opacity-25">
-      <form class="container-fluid justify-content-start">
-        <ul class="nav nav-underline">
+    <nav class="nav navbar mb-3">
+
+      <div class="container-fluid d-flex border-bottom">
+        <ul class="nav nav-underline justify-content-start">
           <li class = "nav-item ml-3">
-            <a class="nav-link active text-secondary" href="#">Urgentes</a>
+            <a class="nav-link active text-primary" href="#">Urgentes</a>
           </li>
           <li class = "nav-item ml-3">
-            <a class="nav-link text-success" href="/done">Finalizados</a>
+            <a class="nav-link text-dark" href="/done">Finalizados</a>
           </li>
         </ul>
+
+        <div class="dropdown justify-content-end">
+          <span class="dropdown-toggle mt-2 justify-content-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="avatar"><%= user.charAt(0) %></div>
+           
+          </span>
+          <ul class="dropdown-menu dropdown-menu-end">
+           
+            <div class="row">
+              <div class="col-auto">
+                <div class="avatar-menu mt-1 "><%= user.charAt(0) %></div>
+              </div>
+              <div class="col">
+                <li class="mt-1"><%= user %> </li>
+                <li class="small"> <a href="#">Deslogar</a> </li>
+              </div>
+            </div>
+             
+          </ul>
+        </div>
+
+      </div>
+
+      <div  class="container-fluid justify-content-end mt-2">
         <ul class="nav ms-auto">
           <li class="nav-item">
             <button type="button" class="btn btn-outline-success btn-new-request me-3 " data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1 h5"></i>Novo Pedido</button>
@@ -41,7 +67,7 @@
             <a href="/" class="btn btn-outline-primary" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
           </li>
         </ul>
-      </form>
+      </div>
     </nav>
     
     <% for (let i = 0; i < requests.length; i++) { %>
@@ -150,9 +176,9 @@
       </div>
     </div>
 
-<footer>
-    <p class="text-center pt-2">&copy; Leonardo Anders</p>
-</footer>
+  <footer>
+      <p class="text-center pt-2">&copy; Leonardo Anders</p>
+  </footer>
 
 </body>
 </html>

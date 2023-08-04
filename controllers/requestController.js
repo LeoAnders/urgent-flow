@@ -25,7 +25,7 @@ const allRequests = async (req, res) => {
 const loadFinishedRequests = async (req,res) =>{
   try{
     let docs = await Request.find({ finished: true })
-    res.render("done", {requests:docs}) 
+    res.render("done", {requests:docs, user: req.user.name}) 
   }catch(error){
     res.status(404)
   }
@@ -40,7 +40,7 @@ const addFinishedRequest = async (req, res) => {
     await doc.save();
 
     let updateRequests = await Request.find({finished: false })
-    res.render("all", {requests: updateRequests})
+    res.render("all", {requests: updateRequests, user: req.user.name })
   } catch (error) {
     res.status(404);
   }
@@ -74,7 +74,7 @@ const filterCurrentDay = async (req, res) => {
 const latestFiltering = async (req, res) => {
   try{
     let docs = await Request.find({finished: true}).sort({date: 1}).exec();
-    res.render("done", { requests: docs })
+    res.render("done", { requests: docs, user: req.user.name  })
   }catch(error) {
     res.status(500).send(error)
   }
