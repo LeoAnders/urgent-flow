@@ -2,4 +2,3 @@
 function printBtn() {
   window.print();
 }
-

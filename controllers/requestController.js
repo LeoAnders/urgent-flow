@@ -39,8 +39,8 @@ const addFinishedRequest = async (req, res) => {
     doc.finished = true;
     await doc.save();
 
-    let updateRequests = await Request.find({finished: false })
-    res.render("all", {requests: updateRequests, user: req.user.name })
+    let updateRequests = await Request.find({ finished: false });
+    res.redirect("/");
   } catch (error) {
     res.status(404);
   }

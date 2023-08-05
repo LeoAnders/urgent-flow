@@ -11,7 +11,7 @@ module.exports = function(passport) {
        })
         .then(user => {
           if (!user) {
-            return done(null, false, { message: "Usuário nao cadastrado" });
+            return done(null, false, { message: "Credenciais inválidas" });
           }
 
           // Match password
@@ -21,7 +21,7 @@ module.exports = function(passport) {
             if (isMatch) {
               return done(null, user);
             } else {
-              return done(null, false, { message: "Senha incorreta" });
+              return done(null, false, { message: "Credenciais inválidas" });
             }
           });
         })

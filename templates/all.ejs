@@ -49,7 +49,7 @@
               </div>
               <div class="col">
                 <li class="mt-1"><%= user %> </li>
-                <li class="small"> <a href="#">Deslogar</a> </li>
+                <li class="small link-opacity-75-hover mb-3"> <a href="#">Deslogar</a> </li>
               </div>
             </div>
              
@@ -58,15 +58,25 @@
 
       </div>
 
-      <div  class="container-fluid justify-content-end mt-2">
-        <ul class="nav ms-auto">
+      <div  class="container-fluid justify-content-end mt-4">
+       
           <li class="nav-item">
-            <button type="button" class="btn btn-outline-success btn-new-request me-3 " data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1 h5"></i>Novo Pedido</button>
+            <button class="btn btn-filter me-2" type="button">
+              <i class="bi bi-filter"></i>
+              Filtrar
+            </button>
           </li>
+
           <li class="nav-item">
-            <a href="/" class="btn btn-outline-primary" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
+            <a href="/"  type="button" class="btn btn-print" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
           </li>
-        </ul>
+
+        <div class="nav ms-auto">
+          <li class="nav-item">
+            <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
+          </li>
+        </div>
+
       </div>
     </nav>
     
@@ -75,21 +85,19 @@
         <div id="<%=requests[i]._id%>" class="card mb-3">
           <div class="container">
             <div class="row">
-              <div class="line"></div> 
-
-              <div class="col-2 text-center mt-2"> 
-                <span class="day display-4 "><%= requests[i].date.getUTCDate() %></span>
+              <div class="col-2 text-center mt-1"> 
+                <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
                 <div>
-                  <span class="month small"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>
+                  <span class="month"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>
                   <br>
-                  <span class="year small"><%= requests[i].date.getFullYear() %></span>
+                  <span class="year"><%= requests[i].date.getFullYear() %></span>
                 </div>           
               </div>
     
-              <div class="col mt-3">
-                <div class="row">
+              <div class="col border-start">
+                <div class="row mt-2">
                   <div class="col">
-                    <div class="mb-2 "> <span>Nome: </span><%= requests[i].name %></div>
+                    <div class="mb-2"> <span>Nome: </span><%= requests[i].name %></div>
                   </div>
                   <div class="col">
                     <div> <span>Representante: </span> <%= requests[i].representative %></div>
@@ -99,7 +107,6 @@
                 <div class="row">
                   <div class="col">
                     <div class="mb-2"> <span >N° do Pedido: </span> <%= requests[i].requestNumber %></div>
-                    <div></div>
                   </div>
                   <div class="col">
                     <div> <span >Envio: </span> <%= requests[i].shipping %></div>
@@ -108,20 +115,26 @@
     
                 <div class="row">
                   <div class="card-footer text-muted">
-                    <div><span>Descrição: </span><%= requests[i].description %></div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div class="col ">
-                    <form action="/done/<%= requests[i]._id %>" method="POST">
-                      <button class="btn btn-success finished" type="submit"><i class="bi bi-check2-circle me-1"></i> Finalizar</button>
-                    </form>
-                  </div>
-                </div>
+                    <div class="description-container d-flex justify-content-between align-items-center">
+                      <span>Descrição: <%= requests[i].description %></span>
+                      <div>
+            
+                        <form action="/edit/<%= requests[i]._id %>" method="GET" class="d-inline me-1">
+                          <button class="btn btn-dark btn-sm" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
+                        </form>
 
+                        <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
+                          <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2-circle me-1"></i>Concluir</button>
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
               </div>
             </div>
+
           </div>
         </div>
       <% } %>
