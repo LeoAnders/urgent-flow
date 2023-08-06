@@ -12,6 +12,7 @@ router.get("/done", requestController.loadFinishedRequests)
 
 router.post("/", express.urlencoded({ extended:true }), requestController.addRequest);
 router.post("/done/:id", express.urlencoded({ extended:true }), requestController.addFinishedRequest)
+router.post("/filter", express.urlencoded({extended: true}), requestController.inputFilter)
 
 router.delete("/done/:id", requestController.deleteRequest)
 router.delete("/done", express.urlencoded({ extended:true }), requestController.deleteRequest)

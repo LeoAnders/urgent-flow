@@ -1,3 +1,4 @@
+const { request } = require("express");
 const Request = require("../models/Request");
 
 //Add request to urgent screen
@@ -80,6 +81,44 @@ const latestFiltering = async (req, res) => {
   }
 }
 
+const inputFilter = async (req, res) => {
+  const { filterStartDate, filterEndDate, filterName, filterRequestNumber } = req.body;
+  try{
+    const query = {}
+
+    if (filterStartDate) {
+      // Filter on a single day
+      if (!filterEndDate) {
+        query.date = new Date(filterStartDate);
+      }
+      // filter on a date range
+      else {
+        query.date = {
+          $gte: new Date(filterStartDate),
+          $lte: new Date(filterEndDate)
+        };
+      }
+    }
+
+    if (filterName) {
+      query.name = filterName;
+    }
+    if (filterRequestNumber) {
+      query.requestNumber = filterRequestNumber;
+    }
+    
+    let docs = await Request.find(query)
+
+    res.render("all", { requests: docs, user: req.user.name });
+
+
+  }catch(error){
+    res.send(error)
+  }
+
+
+} 
+
 module.exports = { 
   addRequest,
   allRequests,
@@ -88,4 +127,5 @@ module.exports = {
   deleteRequest,
   filterCurrentDay,
   latestFiltering,
+  inputFilter,
 };

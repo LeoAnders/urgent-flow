@@ -81,22 +81,28 @@
         <!-- Colapse filter -->
         <div class="collapse" id="colapseFilter">
            <div class="card card-body">
-              <form action="/filtrar" method="POST">
+              <form action="/filter" method="POST">
 
                 <div class="row">
+
                   <div class="col">
-                    <label for="data">Data</label>
-                    <input type="date" class="form-control" id="" name="">
+                    <label for="data">Data inicial</label>
+                    <input type="date" class="form-control" name="filterStartDate">
+                  </div>
+
+                  <div class="col">
+                    <label for="dataFinal">Data Final</label>
+                    <input type="date" class="form-control" name="filterEndDate">
                   </div>
 
                   <div class="col">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="" name="">
+                    <input type="text" class="form-control" name="filterName">
                   </div>
 
                   <div class="col">
                     <label for="nome">N° do pedido</label>
-                    <input type="number" class="form-control" id="" name="">
+                    <input type="number" class="form-control" name="filterRequestNumber">
                   </div>
                 </div>
 
