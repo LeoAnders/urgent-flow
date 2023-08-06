@@ -17,7 +17,7 @@ const allRequests = async (req, res) => {
     let docs = await Request.find( {} );
     res.render("all", { requests: docs, user: req.user.name });
   }catch(error) {
-    res.send("no links found")
+    res.send(error)
   }
 };
 

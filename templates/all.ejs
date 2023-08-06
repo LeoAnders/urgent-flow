@@ -18,11 +18,10 @@
 </head>
 
 <body>
-  
+
    
   <!--Navbar-->
   <div class="container bg-light rounded-top-4 vh-100 mt-3">
-
     
     <nav class="nav navbar mb-3">
 
@@ -49,7 +48,7 @@
               </div>
               <div class="col">
                 <li class="mt-1"><%= user %> </li>
-                <li class="small link-opacity-75-hover mb-3"> <a href="#">Deslogar</a> </li>
+                <li class="small link-opacity-75-hover mb-3"> <a href="#">Desconectar</a> </li>
               </div>
             </div>
              
@@ -57,32 +56,63 @@
         </div>
 
       </div>
-
-      <div  class="container-fluid justify-content-end mt-4">
-       
-          <li class="nav-item">
-            <button class="btn btn-filter me-2" type="button">
-              <i class="bi bi-filter"></i>
-              Filtrar
-            </button>
-          </li>
-
-          <li class="nav-item">
-            <a href="/"  type="button" class="btn btn-print" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
-          </li>
-
-        <div class="nav ms-auto">
-          <li class="nav-item">
-            <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
-          </li>
-        </div>
-
-      </div>
     </nav>
+
+      <div class="container-fluid mt-2 mb-3">
+       <div class="d-flex justify-content-between">
+          <div>
+              <button class="btn btn-filter me-2 mb-2" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#colapseFilter"
+                      aria-expanded="false">
+                  <i class="bi bi-filter"></i>Filtrar
+              </button>
+          </div>
+
+          <div>
+              <a href="/" type="button" class="btn btn-print me-2" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
+          </div>
+
+          <div class="ms-auto">
+              <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
+          </div>
+        </div>
+      
+        <!-- Colapse filter -->
+        <div class="collapse" id="colapseFilter">
+           <div class="card card-body">
+              <form action="/filtrar" method="POST">
+
+                <div class="row">
+                  <div class="col">
+                    <label for="data">Data</label>
+                    <input type="date" class="form-control" id="" name="">
+                  </div>
+
+                  <div class="col">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="" name="">
+                  </div>
+
+                  <div class="col">
+                    <label for="nome">N° do pedido</label>
+                    <input type="number" class="form-control" id="" name="">
+                  </div>
+                </div>
+
+                <footer class="mt-2">
+                   <button type="submit" class="btn btn-secondary btn-sm mt-2 me-2">Aplicar filtro</button>
+                   <button type="button" class="btn btn-danger btn-sm mt-2 d-none" id="desfazerFiltro">Desfazer Filtro</button>
+                </footer>
+              </form>
+
+          </div>
+        </div>
+      </div>
     
     <% for (let i = 0; i < requests.length; i++) { %>
       <% if (!requests[i].finished) { %>
-        <div id="<%=requests[i]._id%>" class="card mb-3">
+        <div id="<%=requests[i]._id%>" class="card mb-3 information-pad">
           <div class="container">
             <div class="row">
               <div class="col-2 text-center mt-1"> 
@@ -120,7 +150,7 @@
                       <div>
             
                         <form action="/edit/<%= requests[i]._id %>" method="GET" class="d-inline me-1">
-                          <button class="btn btn-dark btn-sm" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
+                          <button class="btn btn-secondary btn-sm" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
                         </form>
 
                         <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">

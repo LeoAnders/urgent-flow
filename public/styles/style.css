@@ -68,10 +68,12 @@
  
 }
 
-.card{
+.information-pad{
   border-left: 4px solid #198754;
   background-color: #fff;
-  
+  margin-left: 0.8em;
+  margin-right: 0.5em;
+
 }
 
 span{
