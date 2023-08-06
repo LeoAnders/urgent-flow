@@ -16,7 +16,9 @@ const addRequest = async (req, res) => {
 const allRequests = async (req, res) => {
   try{
     let docs = await Request.find( {} );
-    res.render("all", { requests: docs, user: req.user.name });
+    const undoFilter = req.method === 'POST' && req.originalUrl === '/filter';
+    res.render("all", { requests: docs, user: req.user.name, undoFilter});
+
   }catch(error) {
     res.send(error)
   }
@@ -26,6 +28,7 @@ const allRequests = async (req, res) => {
 const loadFinishedRequests = async (req,res) =>{
   try{
     let docs = await Request.find({ finished: true })
+  
     res.render("done", {requests:docs, user: req.user.name}) 
   }catch(error){
     res.status(404)
@@ -108,15 +111,14 @@ const inputFilter = async (req, res) => {
     }
     
     let docs = await Request.find(query)
+    const undoFilter = req.method === 'POST' && req.originalUrl === '/filter';
 
-    res.render("all", { requests: docs, user: req.user.name });
+    res.render("all", { requests: docs, user: req.user.name, undoFilter});
 
 
   }catch(error){
     res.send(error)
   }
-
-
 } 
 
 module.exports = { 
