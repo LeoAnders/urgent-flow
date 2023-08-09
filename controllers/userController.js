@@ -87,6 +87,7 @@ const registerHandle = async (req, res) => {
     }
 };
 
+// Login handle
 const userPassport = (req, res, next ) => {
   passport.authenticate('local', {
     successRedirect: '/',
@@ -96,9 +97,20 @@ const userPassport = (req, res, next ) => {
 
 }
 
+// Logout handle
+const userLogout = (req, res) => {
+
+  req.logout(() => {
+    req.flash("success_msg", "você está desconectado");
+    res.redirect("/user/login");
+    
+  });
+};
+
 module.exports = {
   userLogin,
   userRegister,
   registerHandle,
   userPassport,
+  userLogout
 }
