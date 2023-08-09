@@ -1,39 +1,47 @@
-const { request } = require("express");
 const Request = require("../models/Request");
 
 //Add request to urgent screen
 const addRequest = async (req, res) => {
-   let request = new Request(req.body)
+  let request = new Request(req.body);
   try {
     let doc = await request.save();
-    res.redirect("/")
+    res.redirect("/");
   } catch (error) {
     res.render("all");
   }
 };
 
-//loads the urgent screen 
+//loads the urgent screen
 const allRequests = async (req, res) => {
-  try{
-    let docs = await Request.find( {} );
-    const undoFilter = req.method === 'POST' && req.originalUrl === '/filter';
-    res.render("all", { requests: docs, user: req.user.name, undoFilter});
+  try {
+    let docs = await Request.find({});
 
-  }catch(error) {
-    res.send(error)
+    const undoFilter = req.method === "POST" && req.originalUrl === "/filter";
+
+    // Keeps collapse open after applying filter
+    const keepCollapseOpen = false;
+
+    res.render("all", {
+      requests: docs,
+      user: req.user.name,
+      undoFilter,
+      keepCollapseOpen,
+    });
+  } catch (error) {
+    res.send(error);
   }
 };
 
 //load finished screen
-const loadFinishedRequests = async (req,res) =>{
-  try{
-    let docs = await Request.find({ finished: true })
-  
-    res.render("done", {requests:docs, user: req.user.name}) 
-  }catch(error){
-    res.status(404)
+const loadFinishedRequests = async (req, res) => {
+  try {
+    let docs = await Request.find({ finished: true });
+
+    res.render("done", { requests: docs, user: req.user.name });
+  } catch (error) {
+    res.status(404);
   }
-}
+};
 
 //Add request to finished screen
 const addFinishedRequest = async (req, res) => {
@@ -52,42 +60,42 @@ const addFinishedRequest = async (req, res) => {
 
 //deleting request from the finished screen
 const deleteRequest = async (req, res) => {
-  let id = req.params.id
-  if(!id){
-    id = req.body.id
+  let id = req.params.id;
+  if (!id) {
+    id = req.body.id;
   }
-  try{
-    await Request.findByIdAndDelete(id)
-    res.redirect("/done")
-  }catch(error){
-    res.status(404).send(error)
+  try {
+    await Request.findByIdAndDelete(id);
+    res.redirect("/done");
+  } catch (error) {
+    res.status(404).send(error);
   }
-}
+};
 
 //filter requests by current date
 const filterCurrentDay = async (req, res) => {
-  try{
-    let docs = await Request.find({finished: false}).sort({date: 1});
-    res.render("all", { requests: docs })
-  }catch(error) {
-    res.status(500).send(error)
+  try {
+    let docs = await Request.find({ finished: false }).sort({ date: 1 });
+    res.render("all", { requests: docs });
+  } catch (error) {
+    res.status(500).send(error);
   }
-}
+};
 
 //filter by most recent completed request
 const latestFiltering = async (req, res) => {
-  try{
-    let docs = await Request.find({finished: true}).sort({date: 1}).exec();
-    res.render("done", { requests: docs, user: req.user.name  })
-  }catch(error) {
-    res.status(500).send(error)
+  try {
+    let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
+    res.render("done", { requests: docs, user: req.user.name });
+  } catch (error) {
+    res.status(500).send(error);
   }
-}
+};
 
 const inputFilter = async (req, res) => {
   const { filterStartDate, filterEndDate, filterName, filterRequestNumber } = req.body;
-  try{
-    const query = {}
+  try {
+    const query = {};
 
     if (filterStartDate) {
       // Filter on a single day
@@ -98,7 +106,7 @@ const inputFilter = async (req, res) => {
       else {
         query.date = {
           $gte: new Date(filterStartDate),
-          $lte: new Date(filterEndDate)
+          $lte: new Date(filterEndDate),
         };
       }
     }
@@ -109,19 +117,26 @@ const inputFilter = async (req, res) => {
     if (filterRequestNumber) {
       query.requestNumber = filterRequestNumber;
     }
-    
-    let docs = await Request.find(query)
-    const undoFilter = req.method === 'POST' && req.originalUrl === '/filter';
 
-    res.render("all", { requests: docs, user: req.user.name, undoFilter});
+    let docs = await Request.find(query);
+    const undoFilter = req.method === "POST" && req.originalUrl === "/filter";
 
+    // Keeps collapse open after applying filter
+    const keepCollapseOpen = true;
 
-  }catch(error){
-    res.send(error)
+    res.render("all", {
+      requests: docs,
+      user: req.user.name,
+      undoFilter,
+      keepCollapseOpen,
+      storeValues,
+    });
+  } catch (error) {
+    res.send(error);
   }
-} 
+};
 
-module.exports = { 
+module.exports = {
   addRequest,
   allRequests,
   loadFinishedRequests,

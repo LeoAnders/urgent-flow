@@ -79,7 +79,7 @@
         </div>
       
         <!-- Colapse filter -->
-        <div class="collapse" id="colapseFilter">
+        <div class="collapse <%= keepCollapseOpen ? "show" : " " %>" id="colapseFilter">
            <div class="card card-body">
               <form action="/filter" method="POST">
 
@@ -157,8 +157,8 @@
                       <span>Descrição: <%= requests[i].description %></span>
                       <div>
             
-                        <form action="/edit/<%= requests[i]._id %>" method="GET" class="d-inline me-1">
-                          <button class="btn btn-secondary btn-sm" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
+                        <form action="" method="GET" class="d-inline me-1">
+                          <button class="btn btn-secondary btn-sm d-none" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
                         </form>
 
                         <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
