@@ -7,3 +7,8 @@ function printBtn() {
 document.getElementById('undoFilter').addEventListener('click', () => {
   window.location.href = '/'; // Redirect for initial page
 });
+
+//Reload page  
+function reload(){
+  window.location.reload()
+};

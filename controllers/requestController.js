@@ -14,7 +14,7 @@ const addRequest = async (req, res) => {
 //loads the urgent screen
 const allRequests = async (req, res) => {
   try {
-    let docs = await Request.find({});
+    let docs = await Request.find({ finished: false }).sort({ date: 1 }); 
 
     const undoFilter = req.method === "POST" && req.originalUrl === "/filter";
 
@@ -32,17 +32,6 @@ const allRequests = async (req, res) => {
   }
 };
 
-//load finished screen
-const loadFinishedRequests = async (req, res) => {
-  try {
-    let docs = await Request.find({ finished: true });
-
-    res.render("done", { requests: docs, user: req.user.name });
-  } catch (error) {
-    res.status(404);
-  }
-};
-
 //Add request to finished screen
 const addFinishedRequest = async (req, res) => {
   try {
@@ -51,8 +40,18 @@ const addFinishedRequest = async (req, res) => {
     doc.finished = true;
     await doc.save();
 
-    let updateRequests = await Request.find({ finished: false });
     res.redirect("/");
+  } catch (error) {
+    res.status(404);
+  }
+};
+
+//load finished screen
+const loadFinishedRequests = async (req, res) => {
+  try {
+    let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
+
+    res.render("done", { requests: docs, user: req.user.name });
   } catch (error) {
     res.status(404);
   }
@@ -72,26 +71,7 @@ const deleteRequest = async (req, res) => {
   }
 };
 
-//filter requests by current date
-const filterCurrentDay = async (req, res) => {
-  try {
-    let docs = await Request.find({ finished: false }).sort({ date: 1 });
-    res.render("all", { requests: docs });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
-//filter by most recent completed request
-const latestFiltering = async (req, res) => {
-  try {
-    let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
-    res.render("done", { requests: docs, user: req.user.name });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
-
+// Filter request 
 const inputFilter = async (req, res) => {
   const { filterStartDate, filterEndDate, filterName, filterRequestNumber } = req.body;
   try {
@@ -142,7 +122,5 @@ module.exports = {
   loadFinishedRequests,
   addFinishedRequest,
   deleteRequest,
-  filterCurrentDay,
-  latestFiltering,
   inputFilter,
 };

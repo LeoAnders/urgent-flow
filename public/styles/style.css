@@ -59,13 +59,21 @@
   height: auto;
   font-size: 15px;
 }
+.btn-reload{
+  background-color: #fff;
+  border: 1px  solid #a0a0a0;
+  height: auto;
+  font-size: 15px;
+}
 .btn-print:hover{
   border: 1px  solid #757575;
 }
 
 .btn-filter:hover{
   border: 1px  solid #757575;
- 
+}
+.btn-reload:hover{
+  border: 1px  solid #a0a0a0;
 }
 
 .information-pad{
