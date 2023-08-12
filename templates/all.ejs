@@ -190,55 +190,9 @@
         </div>
       <% } %>
     <% } %>
-    
-  
-    <!-- Modal -->
-    <div class="modal fade" id="orders-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h5 class="modal-title " id="exampleModalLabel">Preenchimento de dados do pedido</h5>
-          </div>
-          <div class="modal-body">
 
-               <!--Filling data-->
-              <form id="form-modal" action="/" method="POST">
-                <div class="row">
-                  <div class="col-6 mt-2">
-                    <p class="mb-0">Nome</p>
-                    <input type="text" class="form-control" name="name" placeholder="Campo obrigatório" required>
-                  </div>
-                  <div class="col-6 mt-2">
-                    <p class="mb-0">Representante</p>
-                    <input type="text" class="form-control" name="representative" placeholder="Opcional">
-                  </div>
-                  <div class="col-6 mt-3">
-                    <p class="mb-0">N° do pedido</p>
-                    <input type="number" class="form-control" name="requestNumber" placeholder="Importante" >
-                  </div>
-                  <div class="col-6 mt-3">
-                    <p class="mb-0">Data de entrega</p>
-                    <input type="date" class="form-control" name="date" required>
-                  </div>
-                  
-                  <div class="col-6 mt-3">
-                    <p class="mb-0">Envio</p>
-                    <input type="text" class="form-control" name="shipping" placeholder="Opcional">
-                  </div>
-                  <div class="col-6 mt-3">
-                    <p class="mb-0">Descrição</p>
-                    <textarea class="field form-control " name="description" placeholder="Opcional" rows="1"></textarea>
-                  </div>
-                </div>
-                <div class="text-end mt-3">
-                  <button type="button" class="btn btn-secondary" id="modal-close-btn" data-bs-dismiss="modal">Fechar</button>
-                  <button type="submit" class="btn btn-success" >Salvar</button>
-                </div>
-              </form>
-          </div>        
-        </div>
-      </div>
-    </div>
+  <!--Import modal-->
+  <%- include("./partials/modals.ejs") %>
 
   <footer>
       <p class="text-center pt-2">&copy; Leonardo Anders</p>

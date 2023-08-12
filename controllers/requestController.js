@@ -109,7 +109,6 @@ const inputFilter = async (req, res) => {
       user: req.user.name,
       undoFilter,
       keepCollapseOpen,
-      storeValues,
     });
   } catch (error) {
     res.send(error);
