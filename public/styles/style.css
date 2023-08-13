@@ -1,3 +1,18 @@
+
+.alert-messages{
+  position: fixed;
+  top: 10px;
+  width: 30%;
+  z-index: 9999;
+  padding: 10px;
+  text-align: center;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
 .nav-underline .nav-link:hover{
   border-bottom-color: #0d6efd; /* Altere para a cor desejada */
 }
@@ -81,8 +96,8 @@
   background-color: #fff;
   margin-left: 0.8em;
   margin-right: 0.5em;
-
 }
+
 
 span{
   color: rgb(70, 70, 70);

@@ -19,6 +19,13 @@
 
 <body>
 
+  <div class="d-flex justify-content-center">
+    <div class="alert-messages">
+        <div id="flash-message">
+            <%- include("./partials/messages.ejs")  %>
+        </div>
+    </div>
+</div>
    
   <!--Navbar-->
   <div class="container bg-light rounded-top-4 vh-100 mt-3">
@@ -109,12 +116,12 @@
                   </div>
 
                   <div class="col">
-                    <label for="nome">Nome</label>
+                    <label for="name">Nome</label>
                     <input type="text" class="form-control" name="filterName">
                   </div>
 
                   <div class="col">
-                    <label for="nome">N° do pedido</label>
+                    <label for="requestNumber">N° do pedido</label>
                     <input type="number" class="form-control" name="filterRequestNumber">
                   </div>
                 </div>
@@ -170,10 +177,8 @@
                       <span>Descrição: <%= requests[i].description %></span>
                       <div>
             
-                        <form action="" method="GET" class="d-inline me-1">
-                          <button class="btn btn-secondary btn-sm d-none" type="submit"><i class="bi bi-pencil-square me-1"></i>Editar</button>
-                        </form>
-
+                        <a class="btn btn-secondary btn-sm" href="edit/<%= requests[i]._id %>"><i class="bi bi-pencil-square me-1"></i>Editar</a>
+                        
                         <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
                           <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2-circle me-1"></i>Concluir</button>
                         </form>

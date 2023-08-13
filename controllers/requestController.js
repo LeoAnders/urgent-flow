@@ -1,3 +1,4 @@
+const { request } = require("express");
 const Request = require("../models/Request");
 
 //Add request to urgent screen
@@ -28,7 +29,7 @@ const allRequests = async (req, res) => {
       keepCollapseOpen,
     });
   } catch (error) {
-    res.send(error);
+     res.status(404).send(error);
   }
 };
 
@@ -115,6 +116,52 @@ const inputFilter = async (req, res) => {
   }
 };
 
+//Load page edit
+const loadEdit = async (req, res) => {
+
+  let id = req.params.id;
+  try {
+      let doc = await Request.findById(id)
+      res.render('edit', { error: false, body: doc })
+  } catch (error) {
+      res.status(404).send(error);
+  }
+}
+
+// Edit request
+const editRequest = async (req, res) => {
+
+  const {name, representative, requestNumber, date, shipping, description} = req.body
+
+  const request = {}
+  request.name = name
+  request.representative = representative
+  request.requestNumber = requestNumber
+  request.date = date
+  request.shipping = shipping
+  request.description =description
+
+  let requestId = req.params.id;
+if (!requestId) {
+    requestId = req.body.id;
+}
+
+  
+  try {
+
+    await Request.updateOne({ _id: requestId }, request)
+
+    req.flash("success_msg", "Pedido editado com sucesso")
+    res.redirect('/')
+    
+
+  } catch(error){
+    res.status(500).send('Erro ao editar pedido');
+  }
+
+  
+}
+
 module.exports = {
   addRequest,
   allRequests,
@@ -122,4 +169,6 @@ module.exports = {
   addFinishedRequest,
   deleteRequest,
   inputFilter,
+  loadEdit,
+  editRequest,
 };
