@@ -140,10 +140,15 @@
     
     <% for (let i = 0; i < requests.length; i++) { %>
       <% if (!requests[i].finished) { %>
-        <div id="<%=requests[i]._id%>" class="card mb-3 information-pad">
+        <% const currentDate = new Date(); %>
+        <% const requestDate = new Date(requests[i].date); %>
+        <% const isOverdue = requestDate < currentDate; %>
+        <% const isDueToday = requestDate.getUTCDate()  === currentDate.getUTCDate() ; %>
+        <div id="<%=requests[i]._id%>" class="card mb-3 information-pad <%= isOverdue ? 'overdue' : '' %> <%= isDueToday ? 'due-today' : '' %>">
           <div class="container">
             <div class="row">
               <div class="col-2 text-center mt-1"> 
+                
                 <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
                 <div>
                   <span class="month"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>

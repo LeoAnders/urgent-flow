@@ -98,6 +98,13 @@
   margin-right: 0.5em;
 }
 
+.overdue {
+  border-left-color: red; 
+}
+
+.due-today {
+  border-left-color: rgb(255, 153, 0);
+}
 
 span{
   color: rgb(70, 70, 70);

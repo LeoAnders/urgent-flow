@@ -81,7 +81,8 @@ const registerHandle = async (req, res) => {
 
     try{
       let savedUser = await user.save()
-      res.render("register")
+      req.flash("success_msg", `${name} agora faz parte da equipe`)
+      res.redirect("/user/register")
     }catch(error) {
       res.status(400).send(error)
     }
