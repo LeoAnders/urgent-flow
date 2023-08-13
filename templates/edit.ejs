@@ -32,27 +32,27 @@
               <form action="/edit/<%=body.id%>%>" method="POST">
 
                 <div class="row text-start">
-                  <div class="mb-4 col-6">
+                  <div class="mb-2 col-6">
                     <label>Nome</label>
                     <input type="text" class="form-control" name="name" value="<%= body.name %>">
                   </div>
 
-                  <div class="mb-4 col-6">
+                  <div class="mb-2 col-6">
                     <label>Representante</label>
                     <input type="text" class="form-control" name="representative" value="<%= body.representative %>">
                   </div>
                                
-                  <div class="mb-4 col-6">
+                  <div class="mb-2 col-6">
                     <label >N° do pedido</label>
                     <input type="number" class="form-control" name="requestNumber" value="<%= body.requestNumber %>">
                   </div>
 
-                  <div class="mb-4 col-6">
+                  <div class="mb-2 col-6">
                     <label>Data</label>
                     <input type="date" class="form-control" name="date" value="<%=  body.date.toISOString().slice(0, 10) %>%>">
                   </div>
                      
-                  <div class="mb-4 col-6">
+                  <div class="mb-2 col-6">
                     <label>Envio</label>
                     <input type="text" class="form-control" name="shipping" placeholder="Opcional" value="<%= body.shipping %>">
                   </div>

@@ -24,6 +24,8 @@ const allRequests = async (req, res) => {
     res.render("all", {
       requests: docs,
       user: req.user.name,
+      role: req.user.role,
+      admin: req.user.admin,      
       undoFilter,
       keepCollapseOpen,
     });
@@ -51,7 +53,12 @@ const loadFinishedRequests = async (req, res) => {
   try {
     let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
 
-    res.render("done", { requests: docs, user: req.user.name });
+    res.render("done", { 
+      requests: docs, 
+      user: req.user.name,
+      role: req.user.role,
+      admin: req.user.admin,    
+    });
   } catch (error) {
     res.status(404);
   }
@@ -107,6 +114,8 @@ const inputFilter = async (req, res) => {
     res.render("all", {
       requests: docs,
       user: req.user.name,
+      role: req.user.role,
+      admin: req.user.admin,
       undoFilter,
       keepCollapseOpen,
     });

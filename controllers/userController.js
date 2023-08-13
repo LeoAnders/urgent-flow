@@ -102,7 +102,7 @@ const userPassport = (req, res, next ) => {
 const userLogout = (req, res) => {
 
   req.logout(() => {
-    req.flash("success_msg", "você está desconectado");
+    req.flash("success_msg", "você se desconectou");
     res.redirect("/user/login");
     
   });

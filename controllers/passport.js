@@ -1,3 +1,4 @@
+const { unsubscribe } = require("diagnostics_channel");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
@@ -30,7 +31,12 @@ module.exports = function(passport) {
   );
 
   passport.serializeUser((user, done) => {
-    done(null, { id: user.id, name: user.name });
+    done(null, { 
+      id: user.id,
+      name: user.name, 
+      role: user.role, 
+      admin: user.admin,
+     });
   });
 
   passport.deserializeUser((data, done) => {

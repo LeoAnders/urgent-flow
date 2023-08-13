@@ -59,12 +59,13 @@
                 <li class="mt-1"><%= user %> </li>
                 <li class="small link-opacity-75-hover mb-2"> <a href="/user/logout">Desconectar</a> </li>
               </div>
-
               <div class="col-12">
-                <div class="border-top"></div>
-                <a href="/user/register" class="btn btn-dark btn-sm d-block mx-2 mt-3 mb-2"><i class="bi bi-person-plus-fill me-2"></i>Add usuário</a>
-              </div>
-
+                <!-- Only admin can add new user -->
+                <% if(admin === true){ %>
+                  <div class="border-top"></div>
+                  <a href="/user/register" class="btn btn-dark btn-sm d-block mx-2 mt-3 mb-2"><i class="bi bi-person-plus-fill me-2"></i>Add usuário</a>
+                <% } %>
+              </div>                       
             </div>
           </ul>
 
@@ -91,9 +92,12 @@
           <div>
             <button type="button" class="btn btn-reload me-2" onclick="reload()"><i class="bi bi-arrow-clockwise"></i></button>
           </div>
-
+          
+          <!-- Only PCP can add a new order -->
           <div class="ms-auto">
-              <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
+            <% if(role === "pcp") { %>
+                <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
+            <% } %>  
           </div>
 
         </div>
@@ -181,13 +185,19 @@
                     <div class="description-container d-flex justify-content-between align-items-center">
                       <span>Descrição: <%= requests[i].description %></span>
                       <div>
-            
-                        <a class="btn btn-secondary btn-sm me-1" href="edit/<%= requests[i]._id %>"><i class="bi bi-pencil-square me-1"></i>Editar</a>
-                        
-                        <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
-                          <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2-circle me-1"></i>Concluir</button>
-                        </form>
 
+                        <!-- Only PCP can edit a request -->
+                        <% if(role === "pcp"){ %>
+                            <a class="btn btn-secondary btn-sm me-1" href="edit/<%= requests[i]._id %>"><i class="bi bi-pencil-square me-1"></i>Editar</a>
+                        <% } %>
+
+                        <!-- Only expedition can finalize a request -->
+                        <% if(role === "expedition"){ %>
+                          <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
+                            <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2-circle me-1"></i>Concluir</button>
+                          </form>
+                        <% } %>
+                        
                       </div>
                     </div>
                   </div>
