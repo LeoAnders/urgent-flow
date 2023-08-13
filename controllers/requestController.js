@@ -1,4 +1,3 @@
-const { request } = require("express");
 const Request = require("../models/Request");
 
 //Add request to urgent screen
@@ -116,7 +115,7 @@ const inputFilter = async (req, res) => {
   }
 };
 
-//Load page edit
+// Load page edit
 const loadEdit = async (req, res) => {
 
   let id = req.params.id;
@@ -162,6 +161,24 @@ if (!requestId) {
   
 }
 
+// Restore request 
+const restoreRequest = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const doc = await Request.findById(id);
+    
+    doc.finished = false;
+    await doc.save();
+
+    req.flash("success_msg", "Pedido restaurado com sucesso")
+    res.redirect("/done")
+  
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Erro ao restaurar o pedido");
+  }
+};
+
 module.exports = {
   addRequest,
   allRequests,
@@ -171,4 +188,5 @@ module.exports = {
   inputFilter,
   loadEdit,
   editRequest,
+  restoreRequest,
 };

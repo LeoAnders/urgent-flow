@@ -13,16 +13,22 @@
   <link rel="stylesheet"  href="./styles/style.css">
   <!--Bootstrap javascript code-->
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
+  <!--static script file-->
+  <script defer src="/script.js"></script>
 </head>
 
 <body>
+  <div class="d-flex justify-content-center">
+    <div class="alert-messages">
+        <div id="flash-message">
+            <%- include("./partials/messages.ejs")  %>
+        </div>
+    </div>
+  </div>
+
   <!--Navbar-->
   <div class="container bg-light rounded-top-4 vh-100 mt-3">
-
-    
     <nav class="nav navbar mb-3">
-
       <div class="container-fluid d-flex border-bottom">
         <ul class="nav nav-underline justify-content-start">
           <li class = "nav-item ml-3">
@@ -53,64 +59,67 @@
       
     </nav>
     
-    <% for (let i = 0; i < requests.length; i++) { %>
-      <div id="<%=requests[i]._id%>" class="card mb-3">
-        <form method="POST" action="/done/<%= requests[i]._id %>/?_method=DELETE">
-          <div class="container">
-            <div class="row">
-              <div class="col-2 text-center mt-1"> 
-                <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
-                <div>
-                  <span class="month"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>
-                  <br>
-                  <span class="year"><%= requests[i].date.getFullYear() %></span>
-                </div>           
+  <% for (let i = 0; i < requests.length; i++) { %>
+    <div id="<%=requests[i]._id%>" class="card mb-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-2 text-center mt-1"> 
+            <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
+            <div>
+              <span class="month"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>
+              <br>
+              <span class="year"><%= requests[i].date.getFullYear() %></span>
+            </div>           
+          </div>
+    
+          <div class="col border-start">
+            <div class="row mt-2">
+              <div class="col">
+                <div class="mb-2"> <span>Nome: </span><%= requests[i].name %></div>
               </div>
+              <div class="col">
+                <div> <span>Representante: </span> <%= requests[i].representative %></div>
+              </div>
+            </div>
     
-              <div class="col border-start">
-                <div class="row mt-2">
-                  <div class="col">
-                    <div class="mb-2"> <span>Nome: </span><%= requests[i].name %></div>
-                  </div>
-                  <div class="col">
-                    <div> <span>Representante: </span> <%= requests[i].representative %></div>
-                  </div>
-                </div>
+            <div class="row">
+              <div class="col">
+                <div class="mb-2"> <span >N° do Pedido: </span> <%= requests[i].requestNumber %></div>
+              </div>
+              <div class="col">
+                <div> <span >Envio: </span> <%= requests[i].shipping %></div>
+              </div>
+            </div>
     
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-2"> <span >N° do Pedido: </span> <%= requests[i].requestNumber %></div>
-                  </div>
-                  <div class="col">
-                    <div> <span >Envio: </span> <%= requests[i].shipping %></div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div class="card-footer text-muted">
-                    <div class="description-container d-flex justify-content-between align-items-center">
-                      <span>Descrição: <%= requests[i].description %></span>
-                      <div>
+            <div class="row">
+              <div class="card-footer text-muted">
+                <div class="description-container d-flex justify-content-between align-items-center">
+                  <span>Descrição: <%= requests[i].description %></span>
+                  <div>
+                    <div class="row">
+                    <div class="col d-flex justify-content-between align-items-center">
+                        <form method="POST" action="/restore/<%= requests[i]._id %>">
+                          <button class="btn btn-secondary restore btn-sm me-2">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Restaurar
+                          </button>
+                        </form>     
 
-                        <div class="row">
-                          <div class="col ">
-                              <button class="btn btn-danger delete btn-sm" type="submit"><i class="bi bi-x-circle me-1"></i>Deletar</button>
-                          </div>
-                        </div>
-        
-
+                        <form method="POST" action="/done/<%= requests[i]._id %>/?_method=DELETE">
+                          <button class="btn btn-danger delete btn-sm" type="submit">
+                            <i class="bi bi-x-circle me-1"></i>Deletar
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                
               </div>
             </div>
-
           </div>
-        </form>
+        </div>
       </div>
-    <% } %>
+    </div>
+  <% } %>
 
 <footer>
     <p class="text-center pt-2">&copy; Leonardo Anders</p>
