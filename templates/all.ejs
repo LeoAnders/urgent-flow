@@ -151,7 +151,7 @@
         <div id="<%=requests[i]._id%>" class="card mb-3 information-pad <%= isOverdue ? 'overdue' : '' %> <%= isDueToday ? 'due-today' : '' %>">
           <div class="container">
             <div class="row">
-              <div class="col-2 text-center mt-1"> 
+              <div class="col-2 text-center mt-1 date"> 
                 
                 <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
                 <div>
