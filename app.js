@@ -3,9 +3,11 @@ require("dotenv").config();;
 const path = require('path');
 const flash = require("connect-flash");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const requestRoute = require("./routes/requestRoute");
 const userRoute = require("./routes/userRoute");
 const passport = require("passport")
+const dbConnect = require("./database/mongo")
 const { ensureAuthenticated } = require("./controllers/authController")
 
 const app = express();
@@ -23,6 +25,10 @@ mongo()
 
 //Express session
 app.use(session({
+  store: new MongoStore({
+    mongoUrl: process.env.MONGODB_URI,
+    collection: 'sessions' 
+  }),
   secret: 'secret',
   resave: true,
   saveUninitialized: true
