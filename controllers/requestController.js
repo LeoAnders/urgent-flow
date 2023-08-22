@@ -14,7 +14,7 @@ const addRequest = async (req, res) => {
 //loads the urgent screen
 const allRequests = async (req, res) => {
   try {
-    let docs = await Request.find({ finished: false }).sort({ date: 1 }); 
+    let docs = await Request.find({ finished: false }).sort({ date: 1 });
 
     const undoFilter = req.method === "POST" && req.originalUrl === "/filter";
 
@@ -25,12 +25,12 @@ const allRequests = async (req, res) => {
       requests: docs,
       user: req.user.name,
       role: req.user.role,
-      admin: req.user.admin,      
+      admin: req.user.admin,
       undoFilter,
       keepCollapseOpen,
     });
   } catch (error) {
-     res.status(404).send(error);
+    res.status(404).send(error);
   }
 };
 
@@ -53,11 +53,11 @@ const loadFinishedRequests = async (req, res) => {
   try {
     let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
 
-    res.render("done", { 
-      requests: docs, 
+    res.render("done", {
+      requests: docs,
       user: req.user.name,
       role: req.user.role,
-      admin: req.user.admin,    
+      admin: req.user.admin,
     });
   } catch (error) {
     res.status(404);
@@ -78,9 +78,10 @@ const deleteRequest = async (req, res) => {
   }
 };
 
-// Filter request 
+// Filter request
 const inputFilter = async (req, res) => {
-  const { filterStartDate, filterEndDate, filterName, filterRequestNumber } = req.body;
+  const { filterStartDate, filterEndDate, filterName, filterRequestNumber } =
+    req.body;
   try {
     const query = {};
 
@@ -126,62 +127,54 @@ const inputFilter = async (req, res) => {
 
 // Load page edit
 const loadEdit = async (req, res) => {
-
   let id = req.params.id;
   try {
-      let doc = await Request.findById(id)
-      res.render('edit', { error: false, body: doc })
+    let doc = await Request.findById(id);
+    res.render("edit", { error: false, body: doc });
   } catch (error) {
-      res.status(404).send(error);
+    res.status(404).send(error);
   }
-}
+};
 
 // Edit request
 const editRequest = async (req, res) => {
+  const { name, representative, requestNumber, date, shipping, description } =
+    req.body;
 
-  const {name, representative, requestNumber, date, shipping, description} = req.body
-
-  const request = {}
-  request.name = name
-  request.representative = representative
-  request.requestNumber = requestNumber
-  request.date = date
-  request.shipping = shipping
-  request.description =description
+  const request = {};
+  request.name = name;
+  request.representative = representative;
+  request.requestNumber = requestNumber;
+  request.date = date;
+  request.shipping = shipping;
+  request.description = description;
 
   let requestId = req.params.id;
-if (!requestId) {
+  if (!requestId) {
     requestId = req.body.id;
-}
-
-  
-  try {
-
-    await Request.updateOne({ _id: requestId }, request)
-
-    req.flash("success_msg", "Pedido editado com sucesso")
-    res.redirect('/')
-    
-
-  } catch(error){
-    res.status(500).send('Erro ao editar pedido');
   }
 
-  
-}
+  try {
+    await Request.updateOne({ _id: requestId }, request);
 
-// Restore request 
+    req.flash("success_msg", "Pedido editado com sucesso");
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).send("Erro ao editar pedido");
+  }
+};
+
+// Restore request
 const restoreRequest = async (req, res) => {
   try {
     const id = req.params.id;
     const doc = await Request.findById(id);
-    
+
     doc.finished = false;
     await doc.save();
 
-    req.flash("success_msg", "Pedido restaurado com sucesso")
-    res.redirect("/done")
-  
+    req.flash("success_msg", "Pedido restaurado com sucesso");
+    res.redirect("/done");
   } catch (error) {
     console.error(error);
     res.status(500).send("Erro ao restaurar o pedido");

@@ -1,27 +1,24 @@
-const User = require ("../models/User")
-const bcrypt = require ("bcryptjs")
-const passport = require("passport")
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 //loads login screen
-const userLogin = async (req, res)=>{
+const userLogin = async (req, res) => {
   try {
     res.render("login");
-
-  }catch(error) {
-    res.status(400).send(error)
+  } catch (error) {
+    res.status(400).send(error);
   }
-}
+};
 
 //load registration screen
-const userRegister = async (req, res)=>{
+const userRegister = async (req, res) => {
   try {
-    res.render("register")
-    
-  }catch(error) {
-    res.status(400).send(error)
+    res.render("register");
+  } catch (error) {
+    res.status(400).send(error);
   }
-
-}
+};
 
 // register handle
 const registerHandle = async (req, res) => {
@@ -52,12 +49,10 @@ const registerHandle = async (req, res) => {
       password,
       password2,
     });
-    
-  } 
-
+  }
 
   // Check if the username already exists in the database
-  let selectedUser = await User.findOne({ username: username});
+  let selectedUser = await User.findOne({ username: username });
   if (selectedUser) {
     errors.push({ msg: "Usuário já existe" });
     return res.render("register", {
@@ -79,32 +74,29 @@ const registerHandle = async (req, res) => {
     admin: admin === "on",
   });
 
-    try{
-      let savedUser = await user.save()
-      req.flash("success_msg", `${name} agora faz parte da equipe`)
-      res.redirect("/user/register")
-    }catch(error) {
-      res.status(400).send(error)
-    }
+  try {
+    let savedUser = await user.save();
+    req.flash("success_msg", `${name} agora faz parte da equipe`);
+    res.redirect("/user/register");
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 // Login handle
-const userPassport = (req, res, next ) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/user/login',
-    failureFlash: true
+const userPassport = (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/user/login",
+    failureFlash: true,
   })(req, res, next);
-
-}
+};
 
 // Logout handle
 const userLogout = (req, res) => {
-
   req.logout(() => {
     req.flash("success_msg", "você se desconectou");
     res.redirect("/user/login");
-    
   });
 };
 
@@ -113,5 +105,5 @@ module.exports = {
   userRegister,
   registerHandle,
   userPassport,
-  userLogout
-}
+  userLogout,
+};

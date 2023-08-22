@@ -4,7 +4,9 @@
   "description": "Urgent Flow",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "author": "LeonardoAnders",
   "license": "MIT",
@@ -20,5 +22,8 @@
     "mongoose": "^7.3.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.2"
   }
 }

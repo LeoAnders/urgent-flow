@@ -1,5 +1,4 @@
-
-.alert-messages{
+.alert-messages {
   position: fixed;
   top: 5px;
   width: 30%;
@@ -13,11 +12,11 @@
   transition: opacity 0.5s ease-out;
 }
 
-.nav-underline .nav-link:hover{
+.nav-underline .nav-link:hover {
   border-bottom-color: #0d6efd; /* Altere para a cor desejada */
 }
 
-.dropdown  span{
+.dropdown span {
   margin-left: 12px;
   text-transform: capitalize;
 }
@@ -25,77 +24,76 @@
   text-transform: capitalize;
 }
 
-.dropdown{
+.dropdown {
   margin-top: -15px;
 }
-.dropdown-menu{
+.dropdown-menu {
   width: 200px;
-  
 }
 
 .avatar {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background-color: #a0a0a0; 
+  background-color: #a0a0a0;
   color: #fff;
   font-size: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px; 
+  margin-left: 8px;
 }
 
 .avatar-menu {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #a0a0a0; 
+  background-color: #a0a0a0;
   color: #fff;
   font-size: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px; 
+  margin-left: 8px;
   margin-right: -8px;
 }
 
-.btn-new-request{
+.btn-new-request {
   height: auto;
   font-size: 15px;
 }
 
-.btn-print{
+.btn-print {
   background-color: #fff;
-  border: 1px  solid  #a0a0a0;
+  border: 1px solid #a0a0a0;
   height: auto;
   font-size: 15px;
 }
 
-.btn-filter{
+.btn-filter {
   background-color: #fff;
-  border: 1px  solid #a0a0a0;
+  border: 1px solid #a0a0a0;
   height: auto;
   font-size: 15px;
 }
-.btn-reload{
+.btn-reload {
   background-color: #fff;
-  border: 1px  solid #a0a0a0;
+  border: 1px solid #a0a0a0;
   height: auto;
   font-size: 15px;
 }
-.btn-print:hover{
-  border: 1px  solid #757575;
+.btn-print:hover {
+  border: 1px solid #757575;
 }
 
-.btn-filter:hover{
-  border: 1px  solid #757575;
+.btn-filter:hover {
+  border: 1px solid #757575;
 }
-.btn-reload:hover{
-  border: 1px  solid #a0a0a0;
+.btn-reload:hover {
+  border: 1px solid #a0a0a0;
 }
 
-.information-pad{
+.information-pad {
   border-left: 4px solid #198754;
   background-color: #fff;
   margin-left: 0.8em;
@@ -103,15 +101,13 @@
 }
 
 .overdue {
-  border-left-color: red; 
+  border-left-color: red;
 }
 
 .due-today {
   border-left-color: rgb(255, 153, 0);
 }
 
-span{
+span {
   color: rgb(70, 70, 70);
 }
-
-
