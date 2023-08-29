@@ -23,6 +23,10 @@ Com o objetivo de possibilitar testes da minha aplicação sem afetar o sistema 
    - **Usuário PCP (Planejamento e Controle de Produção):**
      - **Usuário:** pcpguest
      - **Senha:** explorer
+
+     - **Usuário expedição:**
+      - **Usuário:** expeditionguest
+      - **Senha:** explorer
      
    - **Usuário Vendas:**
      - **Usuário:** salesguest
