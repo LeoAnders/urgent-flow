@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Urgent flow</title>
   <!--Bootstrap link-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <!-- Bootstrap icons-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <!--static CSS file-->
   <link rel="stylesheet" href="/styles/print.css">
-  <link rel="stylesheet"  href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/style.css">
   <!--Bootstrap javascript code-->
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
   <!--static script file-->
   <script defer src="/script.js"></script>
 </head>
@@ -21,51 +25,59 @@
 
   <div class="d-flex justify-content-center">
     <div class="alert-messages">
-        <div id="flash-message">
-            <%- include("./partials/messages.ejs")  %>
-        </div>
+      <div id="flash-message">
+        <%- include("./partials/messages.ejs") %>
+      </div>
     </div>
   </div>
-   
-  <!--Navbar-->
+
+
   <div class="container bg-light rounded-top-4 vh-100 mt-3">
-    
+    <!--Navbar-->
     <nav class="nav navbar mb-3">
 
       <div class="container-fluid d-flex border-bottom">
         <ul class="nav nav-underline justify-content-start">
-          <li class = "nav-item ml-3">
+          <li class="nav-item ml-3">
             <a class="nav-link active text-primary" href="#">Urgentes</a>
           </li>
-          <li class = "nav-item ml-3">
+          <li class="nav-item ml-3">
             <a class="nav-link text-dark" href="/done">Finalizados</a>
           </li>
         </ul>
 
         <div class="dropdown justify-content-end">
 
-          <span class="dropdown-toggle mt-2 justify-content-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="avatar"><%= user.charAt(0) %></div>
+          <span class="dropdown-toggle mt-2 justify-content-end" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <div class="avatar">
+              <%= user.charAt(0) %>
+            </div>
           </span>
 
           <ul class="dropdown-menu dropdown-menu-end">
             <div class="row">
 
               <div class="col-auto">
-                <div class="avatar-menu mt-1"><%= user.charAt(0) %></div>
+                <div class="avatar-menu mt-1">
+                  <%= user.charAt(0) %>
+                </div>
               </div>
-              
+
               <div class="col">
-                <li class="mt-1"><%= user %> </li>
+                <li class="mt-1">
+                  <%= user %>
+                </li>
                 <li class="small link-opacity-75-hover mb-2"> <a href="/user/logout">Desconectar</a> </li>
               </div>
               <div class="col-12">
                 <!-- Only admin can add new user -->
-                <% if(admin === true){ %>
+                <% if(admin===true){ %>
                   <div class="border-top"></div>
-                  <a href="/user/register" class="btn btn-dark btn-sm d-block mx-2 mt-3 mb-2"><i class="bi bi-person-plus-fill me-2"></i>Add usuário</a>
-                <% } %>
-              </div>                       
+                  <a href="/user/register" class="btn btn-dark btn-sm d-block mx-2 mt-3 mb-2"><i
+                      class="bi bi-person-plus-fill me-2"></i>Add usuário</a>
+                  <% } %>
+              </div>
             </div>
           </ul>
 
@@ -74,149 +86,168 @@
       </div>
     </nav>
 
-      <div class="container-fluid mt-2 mb-3">
-       <div class="d-flex justify-content-between">
-          <div>
-              <button class="btn btn-filter me-2 mb-2" type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#colapseFilter"
-                      aria-expanded="false">
-                  <i class="bi bi-filter"></i>Filtrar
-              </button>
-          </div>
-
-          <div>
-              <a href="/" type="button" class="btn btn-print me-2" onclick="printBtn()"><i class="bi bi-printer me-1"></i>Imprimir</a>
-          </div>
-            
-          <div>
-            <button type="button" class="btn btn-reload me-2" onclick="reload()"><i class="bi bi-arrow-clockwise"></i></button>
-          </div>
-          
-          <!-- Only PCP can add a new order -->
-          <div class="ms-auto">
-            <% if(role === "pcp") { %>
-                <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal" data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
-            <% } %>  
-          </div>
-
+    <div class="container-fluid mt-2 mb-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <button class="btn btn-filter me-2 mb-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#colapseFilter" aria-expanded="false">
+            <i class="bi bi-filter"></i>Filtrar
+          </button>
         </div>
-      
-        <!-- Colapse filter -->
-        <div class="collapse <%= keepCollapseOpen ? "show" : " " %>" id="colapseFilter">
-           <div class="card card-body">
-              <form action="/filter" method="POST">
 
-                <div class="row">
-
-                  <div class="col">
-                    <label for="data">Data inicial</label>
-                    <input type="date" class="form-control" name="filterStartDate">
-                  </div>
-
-                  <div class="col">
-                    <label for="dataFinal">Data Final</label>
-                    <input type="date" class="form-control" name="filterEndDate">
-                  </div>
-
-                  <div class="col">
-                    <label for="name">Nome</label>
-                    <input type="text" class="form-control" name="filterName">
-                  </div>
-
-                  <div class="col">
-                    <label for="requestNumber">N° do pedido</label>
-                    <input type="number" class="form-control" name="filterRequestNumber">
-                  </div>
-                </div>
-
-                <footer class="mt-2">
-                   <button type="submit" class="btn btn-secondary btn-sm mt-2 me-2">Aplicar filtro</button>
-                   <% if ( undoFilter ) { %>
-                    <button type="button" class="btn btn-danger btn-sm mt-2" id="undoFilter">Desfazer Filtro</button>
-                  <% } %>
-                </footer>
-              </form>
-
-          </div>
+        <div>
+          <a href="/" type="button" class="btn btn-print me-2" onclick="printBtn()"><i
+              class="bi bi-printer me-1"></i>Imprimir</a>
         </div>
+
+        <div>
+          <button type="button" class="btn btn-reload me-2" onclick="reload()"><i
+              class="bi bi-arrow-clockwise"></i></button>
+        </div>
+
+        <!-- Only PCP can add a new order -->
+        <div class="ms-auto">
+          <% if(role==="pcp" || role==="guest" ) { %>
+            <button type="data" class="btn btn-primary btn-new-request" data-bs-toggle="modal"
+              data-bs-target="#orders-modal"><i class="bi bi-cloud-plus me-1"></i>Novo Pedido</button>
+            <% } %>
+        </div>
+
       </div>
-    
-    <% for (let i = 0; i < requests.length; i++) { %>
-      <% if (!requests[i].finished) { %>
-        <% const currentDate = new Date(); %>
-        <% const requestDate = new Date(requests[i].date); %>
-        <% const isOverdue = requestDate < currentDate; %>
-        <% const isDueToday = requestDate.getUTCDate()  === currentDate.getUTCDate() ; %>
-        <div id="<%=requests[i]._id%>" class="card mb-3 information-pad <%= isOverdue ? 'overdue' : '' %> <%= isDueToday ? 'due-today' : '' %>">
-          <div class="container">
+
+      <!-- Colapse filter -->
+      <div class="collapse <%= keepCollapseOpen ? " show" : " " %>" id="colapseFilter">
+        <div class="card card-body">
+          <form action="/filter" method="POST">
+
             <div class="row">
-              <div class="col-2 text-center mt-1 date"> 
-                
-                <span class="day display-5 "><%= requests[i].date.getUTCDate() %></span>
-                <div>
-                  <span class="month"><%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %></span>
-                  <br>
-                  <span class="year"><%= requests[i].date.getFullYear() %></span>
-                </div>           
+
+              <div class="col">
+                <label for="data">Data inicial</label>
+                <input type="date" class="form-control" name="filterStartDate">
               </div>
-    
-              <div class="col border-start">
-                <div class="row mt-2">
-                  <div class="col">
-                    <div class="mb-2"> <span>Nome: </span><%= requests[i].name %></div>
-                  </div>
-                  <div class="col">
-                    <div> <span>Representante: </span> <%= requests[i].representative %></div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-2"> <span >N° do Pedido: </span> <%= requests[i].requestNumber %></div>
-                  </div>
-                  <div class="col">
-                    <div> <span >Envio: </span> <%= requests[i].shipping %></div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div class="card-footer text-muted">
-                    <div class="description-container d-flex justify-content-between align-items-center">
-                      <span>Descrição: <%= requests[i].description %></span>
-                      <div>
 
-                        <!-- Only PCP can edit a request -->
-                        <% if(role === "pcp"){ %>
-                            <a class="btn btn-secondary btn-sm me-1" href="edit/<%= requests[i]._id %>"><i class="bi bi-pencil-square me-1"></i>Editar</a>
-                        <% } %>
+              <div class="col">
+                <label for="dataFinal">Data Final</label>
+                <input type="date" class="form-control" name="filterEndDate">
+              </div>
 
-                        <!-- Only expedition can finalize a request -->
-                        <% if(role === "expedition"){ %>
-                          <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
-                            <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-check2-circle me-1"></i>Concluir</button>
-                          </form>
-                        <% } %>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
+              <div class="col">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" name="filterName">
+              </div>
+
+              <div class="col">
+                <label for="requestNumber">N° do pedido</label>
+                <input type="number" class="form-control" name="filterRequestNumber">
               </div>
             </div>
 
-          </div>
+            <footer class="mt-2">
+              <button type="submit" class="btn btn-secondary btn-sm mt-2 me-2">Aplicar filtro</button>
+              <% if ( undoFilter ) { %>
+                <button type="button" class="btn btn-danger btn-sm mt-2" id="undoFilter">Desfazer Filtro</button>
+                <% } %>
+            </footer>
+          </form>
+
         </div>
-      <% } %>
-    <% } %>
+      </div>
+    </div>
 
-  <!--Import modal-->
-  <%- include("./partials/modals.ejs") %>
+    <% for (let i=0; i < requests.length; i++) { %>
+      <% if (!requests[i].finished) { %>
+        <% const currentDate=new Date(); %>
+          <% const requestDate=new Date(requests[i].date); %>
+            <% const isOverdue=requestDate < currentDate; %>
+              <% const isDueToday=requestDate.getUTCDate()===currentDate.getUTCDate() ; %>
+                <div id="<%=requests[i]._id%>"
+                  class="card mb-3 information-pad <%= isOverdue ? 'overdue' : '' %> <%= isDueToday ? 'due-today' : '' %>">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-2 text-center mt-1 date">
 
-  <footer>
-      <p class="text-center pt-2">&copy; Leonardo Anders</p>
-  </footer>
+                        <span class="day display-5 ">
+                          <%= requests[i].date.getUTCDate() %>
+                        </span>
+                        <div>
+                          <span class="month">
+                            <%= requests[i].date.toLocaleString("pt-br", { month: 'short' }) %>
+                          </span>
+                          <br>
+                          <span class="year">
+                            <%= requests[i].date.getFullYear() %>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="col border-start">
+                        <div class="row mt-2">
+                          <div class="col">
+                            <div class="mb-2"> <span>Nome: </span>
+                              <%= requests[i].name %>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div> <span>Representante: </span>
+                              <%= requests[i].representative %>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="mb-2"> <span>N° do Pedido: </span>
+                              <%= requests[i].requestNumber %>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div> <span>Envio: </span>
+                              <%= requests[i].shipping %>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="card-footer text-muted">
+                            <div class="description-container d-flex justify-content-between align-items-center">
+                              <span>Descrição: <%= requests[i].description %></span>
+                              <div>
+
+                                <!-- Only PCP can edit a request -->
+                                <% if(role==="pcp" || role==="guest" ){ %>
+                                  <a class="btn btn-secondary btn-sm me-1" href="edit/<%= requests[i]._id %>"><i
+                                      class="bi bi-pencil-square me-1"></i>Editar</a>
+                                  <% } %>
+
+                                    <!-- Only expedition can finalize a request -->
+                                    <% if(role==="expedition" || role==="guest" ){ %>
+                                      <form action="/done/<%= requests[i]._id %>" method="POST" class="d-inline">
+                                        <button class="btn btn-success btn-sm" type="submit"><i
+                                            class="bi bi-check2-circle me-1"></i>Concluir</button>
+                                      </form>
+                                      <% } %>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <% } %>
+                  <% } %>
+
+                    <!--Import modal-->
+                    <%- include("./partials/modals.ejs") %>
+
+                      <footer>
+                        <p class="text-center pt-2">&copy; Leonardo Anders</p>
+                      </footer>
 
 </body>
+
 </html>
