@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const path = require("path");
+const socketIO = require("socket.io");
 const flash = require("connect-flash");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -21,6 +22,7 @@ require("./controllers/passport")(passport);
 
 // MongoDB connection
 const mongo = require("./database/mongo");
+const { Socket } = require("dgram");
 mongo();
 
 //Express session
@@ -60,6 +62,12 @@ app.use("/", ensureAuthenticated, express.json(), requestRoute);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(process.env.PORT, () => {
-  console.log("server running");
+const server = app.listen(process.env.PORT, () => {
+  console.log("Server running");
+});
+
+const io = socketIO(server);
+
+io.on("connection", (socket) => {
+  console.log("New connection");
 });
