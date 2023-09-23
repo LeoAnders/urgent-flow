@@ -71,7 +71,7 @@ const io = socketIO(server);
 io.on("connection", (socket) => {
   console.log("New connection");
 
-  socket.on("new-notification", () => {
-    io.emit("new-request-notification");
+  socket.on("notification", (data) => {
+    socket.broadcast.emit("new-notification", data);
   });
 });
