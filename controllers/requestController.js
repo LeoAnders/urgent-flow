@@ -5,6 +5,8 @@ const addRequest = async (req, res) => {
   let request = new Request(req.body);
   try {
     let doc = await request.save();
+    let name = doc.name;
+    req.flash("success_msg", `O pedido do cliente ${name} foi  com êxito`);
     res.redirect("/");
   } catch (error) {
     res.render("all");
@@ -40,7 +42,13 @@ const addFinishedRequest = async (req, res) => {
     let id = req.params.id;
     let doc = await Request.findById(id);
     doc.finished = true;
+    let name = doc.name;
     await doc.save();
+
+    req.flash(
+      "success_msg",
+      `O pedido do cliente ${name} foi concluído com êxito`,
+    );
 
     res.redirect("/");
   } catch (error) {

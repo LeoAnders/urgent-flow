@@ -1,13 +1,13 @@
 const express = require("express");
 require("dotenv").config();
 const path = require("path");
+const socketIO = require("socket.io");
 const flash = require("connect-flash");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const requestRoute = require("./routes/requestRoute");
 const userRoute = require("./routes/userRoute");
 const passport = require("passport");
-const dbConnect = require("./database/mongo");
 const { ensureAuthenticated } = require("./controllers/authController");
 
 const app = express();
@@ -60,6 +60,21 @@ app.use("/", ensureAuthenticated, express.json(), requestRoute);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(process.env.PORT, () => {
-  console.log("server running");
+//Server socket.io
+const server = app.listen(process.env.PORT, () => {
+  console.log("Server running");
+});
+
+const io = socketIO(server);
+
+io.on("connection", (socket) => {
+  //Notification new request
+  socket.on("notification", (data) => {
+    socket.broadcast.emit("new-notification", data);
+  });
+
+  //Notification concluded
+  socket.on("notification-concluded", (data) => {
+    socket.broadcast.emit("new-notification-concluded", data);
+  });
 });
