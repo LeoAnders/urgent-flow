@@ -8,7 +8,6 @@ const MongoStore = require("connect-mongo");
 const requestRoute = require("./routes/requestRoute");
 const userRoute = require("./routes/userRoute");
 const passport = require("passport");
-const dbConnect = require("./database/mongo");
 const { ensureAuthenticated } = require("./controllers/authController");
 
 const app = express();
@@ -22,7 +21,6 @@ require("./controllers/passport")(passport);
 
 // MongoDB connection
 const mongo = require("./database/mongo");
-const { Socket } = require("dgram");
 mongo();
 
 //Express session

@@ -5,6 +5,10 @@ const addRequest = async (req, res) => {
   let request = new Request(req.body);
   try {
     let doc = await request.save();
+    let name = doc.name;
+
+    req.flash("success_msg", `O pedido do cliente ${name} foi  com êxito`);
+
     res.redirect("/");
   } catch (error) {
     res.render("all");
@@ -40,7 +44,13 @@ const addFinishedRequest = async (req, res) => {
     let id = req.params.id;
     let doc = await Request.findById(id);
     doc.finished = true;
+    let name = doc.name;
     await doc.save();
+
+    req.flash(
+      "success_msg",
+      `O pedido do cliente ${name} foi concluído com êxito`,
+    );
 
     res.redirect("/");
   } catch (error) {
@@ -53,11 +63,18 @@ const loadFinishedRequests = async (req, res) => {
   try {
     let docs = await Request.find({ finished: true }).sort({ date: 1 }).exec();
 
+    const undoFilter = req.method === "POST" && req.originalUrl === "/filter";
+
+    // Keeps collapse open after applying filter
+    const keepCollapseOpen = false;
+
     res.render("done", {
       requests: docs,
       user: req.user.name,
       role: req.user.role,
       admin: req.user.admin,
+      undoFilter: true,
+      keepCollapseOpen,
     });
   } catch (error) {
     res.status(404);
