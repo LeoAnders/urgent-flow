@@ -71,7 +71,13 @@ const io = socketIO(server);
 io.on("connection", (socket) => {
   console.log("New connection");
 
+  //Notification new request
   socket.on("notification", (data) => {
     socket.broadcast.emit("new-notification", data);
+  });
+
+  //Notification concluded
+  socket.on("notification-concluded", (data) => {
+    io.emit("new-notification-concluded", data);
   });
 });
