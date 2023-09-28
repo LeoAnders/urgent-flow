@@ -18,23 +18,5 @@ Com o objetivo de possibilitar testes da minha aplicação sem afetar o sistema 
 2. No modo de usuário convidado, você tem acesso a todas as funções da aplicação. Utilize as seguintes credenciais para acessar:
    - **Usuário:** guest
    - **Senha:** explorer
-   
-3. Para simular diferentes funções do sistema implantado em um ambiente de produção, você também pode usar os seguintes usuários e senhas:
-   - **Usuário PCP (Planejamento e Controle de Produção):**
-     - **Usuário:** pcpguest
-     - **Senha:** explorer
-
-   - **Usuário expedição:**
-      - **Usuário:** expeditionguest
-      - **Senha:** explorer
-     
-   - **Usuário Vendas:**
-     - **Usuário:** salesguest
-     - **Senha:** explorer
-     
-   - **Usuário Produção:**
-     - **Usuário:** productionguest
-     - **Senha:** explorer
-
 
 >**Lembre-se de que este modo é apenas para testes e não deve ser utilizado em um ambiente de produção.**
