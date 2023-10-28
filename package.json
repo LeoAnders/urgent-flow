@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "lint:check": "prettier --check .",
-    "lint:fix": "prettier --write ."
+    "lint:fix": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "LeonardoAnders",
   "license": "MIT",
@@ -25,6 +27,7 @@
     "socket.io": "^4.7.2"
   },
   "devDependencies": {
+    "jest": "^29.6.2",
     "prettier": "^3.0.2"
   }
 }
