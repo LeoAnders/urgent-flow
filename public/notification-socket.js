@@ -36,7 +36,7 @@ socket.on("new-notification-concluded", (data) => {
   }
 });
 
-document.getElementById("form-concluded").addEventListener("submit", () => {
+document.getElementById("form-concluded").addEventListener("click", () => {
   const name = document.querySelector('input[name="name"]').value;
   socket.emit("notification-concluded", { name });
 });
