@@ -189,6 +189,15 @@ const restoreRequest = async (req, res) => {
   }
 };
 
+//loads the boxes screen
+const loadBoxes = async (req, res) => {
+  try {
+    res.render("boxes");
+  } catch (error) {
+    res.status(404).send(error);
+  }
+};
+
 module.exports = {
   addRequest,
   allRequests,
@@ -199,4 +208,5 @@ module.exports = {
   loadEdit,
   editRequest,
   restoreRequest,
+  loadBoxes,
 };

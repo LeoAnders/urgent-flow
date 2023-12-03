@@ -82,6 +82,17 @@
   height: auto;
   font-size: 15px;
 }
+.btn-exit {
+  border: 1px solid #a0a0a0;
+}
+.btn-menu {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  width: 80px;
+  height: 38px;
+  border-radius: 5px;
+}
 .btn-print:hover {
   border: 1px solid #757575;
 }
@@ -92,7 +103,15 @@
 .btn-reload:hover {
   border: 1px solid #a0a0a0;
 }
-
+.btn-menu:focus,
+.btn-menu:active {
+  outline: none;
+  box-shadow: none;
+}
+.btn-exit:hover {
+  border: 1px solid #a0a0a0;
+  background-color: #e9e9e9;
+}
 .information-pad {
   border-left: 4px solid #198754;
   background-color: #fff;

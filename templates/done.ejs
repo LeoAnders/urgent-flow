@@ -2,7 +2,6 @@
 <html lang="pt-br">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Urgent flow</title>
@@ -20,7 +19,7 @@
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
   <!--static script file-->
-  <script defer src="/script.js"></script>
+  <script defer src="/scripts/script.js"></script>
 </head>
 
 <body>
@@ -37,6 +36,13 @@
     <nav class="nav navbar mb-3">
       <div class="container-fluid d-flex border-bottom">
         <ul class="nav nav-underline justify-content-start">
+          <li class="d-flex justify-content-center">
+            <span class="btn-menu d-flex align-items-center" data-bs-toggle="offcanvas" href="#offcanvasExample"
+              role="button" aria-controls="offcanvasExample">
+              <img src="/assets/menu.png" alt="icon" class="me-1">
+              <span class="fw-medium">Menu</span>
+            </span>
+          </li>
           <li class="nav-item ml-3">
             <a class="nav-link text-dark" href="/">Urgentes</a>
           </li>
@@ -44,42 +50,7 @@
             <a class="nav-link active text-primary" href="#">Finalizados</a>
           </li>
         </ul>
-
-        <div class="dropdown justify-content-end">
-          <span class="dropdown-toggle mt-2 justify-content-end" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <div class="avatar">
-              <%= user.charAt(0) %>
-            </div>
-          </span>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <div class="row">
-              <div class="col-auto">
-                <div class="avatar-menu mt-1 ">
-                  <%= user.charAt(0) %>
-                </div>
-              </div>
-              <div class="col">
-                <li class="mt-1">
-                  <%= user %>
-                </li>
-                <li class="small  small link-opacity-75-hover mb-2"> <a href="/user/login">Desconectar</a> </li>
-              </div>
-
-              <div class="col-12">
-                <!-- Only admin can add new user -->
-                <% if(admin===true){ %>
-                  <div class="border-top"></div>
-                  <a href="/user/register" class="btn btn-dark btn-sm d-block mx-2 mt-3 mb-2"><i
-                      class="bi bi-person-plus-fill me-2"></i>Add usuário</a>
-                  <% } %>
-              </div>
-
-            </div>
-          </ul>
-        </div>
       </div>
-
     </nav>
 
     <% for (let i=0; i < requests.length; i++) { %>
@@ -162,6 +133,10 @@
         </div>
       </div>
       <% } %>
+
+        <!--Imports-->
+        <%- include("./partials/modals.ejs") %>
+          <%- include("./partials/offcanvas.ejs") %>
 
   </div>
 </body>
