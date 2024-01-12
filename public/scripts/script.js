@@ -14,11 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//Reload page
-function reload() {
-  window.location.reload();
-}
-
 // after 2s the element of messages close
 setTimeout(function () {
   var flashMessage = document.getElementById("flash-message");

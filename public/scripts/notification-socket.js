@@ -1,6 +1,6 @@
 const socket = io();
 
-//notification new request
+//Event when order is added
 socket.on("new-notification", (data) => {
   if (Notification.permission === "granted") {
     const { name, date } = data;
@@ -16,6 +16,10 @@ socket.on("new-notification", (data) => {
       requireInteraction: true,
     });
   }
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 2000);
 });
 
 document.getElementById("form-modal").addEventListener("submit", () => {
@@ -24,7 +28,7 @@ document.getElementById("form-modal").addEventListener("submit", () => {
   socket.emit("notification", { name, date });
 });
 
-//notification request concluded
+//Event when order is completed
 socket.on("new-notification-concluded", (data) => {
   let { name } = data;
   if (Notification.permission === "granted") {
@@ -34,6 +38,10 @@ socket.on("new-notification-concluded", (data) => {
       requireInteraction: true,
     });
   }
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 2000);
 });
 
 document.getElementById("form-concluded").addEventListener("click", () => {
