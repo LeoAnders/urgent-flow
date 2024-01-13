@@ -7,7 +7,7 @@ const requestController = require("../controllers/requestController");
 
 router.get("/", requestController.allRequests);
 router.get("/done", requestController.loadFinishedRequests);
-router.get("/boxes", requestController.loadBoxes);
+router.get("/box", requestController.loadBox);
 router.get("/edit/:id", requestController.loadEdit);
 
 router.post(
@@ -34,11 +34,6 @@ router.post(
   "/restore/:id",
   express.urlencoded({ extended: true }),
   requestController.restoreRequest,
-);
-router.post(
-  "/done",
-  express.urlencoded({ extended: true }),
-  requestController.loadBoxes,
 );
 
 router.delete("/done/:id", requestController.deleteRequest);

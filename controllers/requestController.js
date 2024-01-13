@@ -6,7 +6,10 @@ const addRequest = async (req, res) => {
   try {
     let doc = await request.save();
     let name = doc.name;
-    req.flash("success_msg", `O pedido do cliente ${name} foi  com êxito`);
+    req.flash(
+      "success_msg",
+      `O pedido do cliente ${name} foi criado com êxito`,
+    );
     res.redirect("/");
   } catch (error) {
     res.render("all");
@@ -190,9 +193,9 @@ const restoreRequest = async (req, res) => {
 };
 
 //loads the boxes screen
-const loadBoxes = async (req, res) => {
+const loadBox = async (req, res) => {
   try {
-    res.render("boxes");
+    res.render("box");
   } catch (error) {
     res.status(404).send(error);
   }
@@ -208,5 +211,5 @@ module.exports = {
   loadEdit,
   editRequest,
   restoreRequest,
-  loadBoxes,
+  loadBox,
 };
