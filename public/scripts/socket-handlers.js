@@ -1,5 +1,12 @@
 const socket = io();
 
+// Function to reload the page after a delay
+function reloadPage() {
+  setTimeout(() => {
+    window.location.reload();
+  }, 2000);
+}
+
 //Event when order is added
 socket.on("new-notification", (data) => {
   if (Notification.permission === "granted") {
@@ -17,9 +24,7 @@ socket.on("new-notification", (data) => {
     });
   }
 
-  setTimeout(() => {
-    window.location.reload();
-  }, 2000);
+  reloadPage();
 });
 
 document.getElementById("form-modal").addEventListener("submit", () => {
@@ -39,9 +44,7 @@ socket.on("new-notification-concluded", (data) => {
     });
   }
 
-  setTimeout(() => {
-    window.location.reload();
-  }, 2000);
+  reloadPage();
 });
 
 document.getElementById("form-concluded").addEventListener("click", () => {
